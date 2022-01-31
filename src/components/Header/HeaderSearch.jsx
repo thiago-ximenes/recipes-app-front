@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import MyContext from '../../MyHeaderSearchContext/MyContent';
 
 function HeaderSearch() {
   const [input, setInput] = useState('');
   const [radioValue, setRadioValue] = useState('');
+
+  const { setSearchHeaderRadioValue, setSearchHeaderInputValue } = useContext(MyContext);
 
   return (
     <Form>
@@ -44,6 +47,10 @@ function HeaderSearch() {
       />
       <Button
         data-testid="exec-search-btn"
+        onClick={ () => {
+          setSearchHeaderInputValue(input);
+          setSearchHeaderRadioValue(radioValue);
+        } }
       >
         Search
       </Button>

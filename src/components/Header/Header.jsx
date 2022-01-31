@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
 import HeaderSearch from './HeaderSearch';
+import MyHeaderSearchProvider from '../../MyHeaderSearchContext/MyHeaderSearchProvider';
 
 // 360 x 640
 function Header() {
@@ -11,36 +12,38 @@ function Header() {
   const history = useHistory();
 
   return (
-    <div>
-      <button
-        type="button"
-        data-testid="profile-top-btn"
-        onClick={ () => history.push('/profile') }
-      >
-        <img
-          src={ profile }
-          alt="Profile Icon"
-        />
-      </button>
-      <h1
-        data-testid="page-title"
-      >
-        Profile
-      </h1>
-      <button
-        type="button"
-        data-testid="search-top-btn"
-        onClick={ () => setToggleSearch(!toggleSearch) }
-      >
-        <img
-          src={ search }
-          alt="Search Icon"
-        />
-      </button>
-      {toggleSearch && (
-        <HeaderSearch />
-      )}
-    </div>
+    <MyHeaderSearchProvider>
+      <div>
+        <button
+          type="button"
+          data-testid="profile-top-btn"
+          onClick={ () => history.push('/profile') }
+        >
+          <img
+            src={ profile }
+            alt="Profile Icon"
+          />
+        </button>
+        <h1
+          data-testid="page-title"
+        >
+          Profile
+        </h1>
+        <button
+          type="button"
+          data-testid="search-top-btn"
+          onClick={ () => setToggleSearch(!toggleSearch) }
+        >
+          <img
+            src={ search }
+            alt="Search Icon"
+          />
+        </button>
+        {toggleSearch && (
+          <HeaderSearch />
+        )}
+      </div>
+    </MyHeaderSearchProvider>
   );
 }
 
