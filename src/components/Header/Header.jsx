@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
-import PropTypes from 'prop-types';
 
 // 360 x 640
-function Header({ history }) {
-
+function Header() {
   const [toggleSearch, setToggleSearch] = useState(false);
+  const history = useHistory();
 
   return (
     <div>
