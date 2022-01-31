@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
+import HeaderSearch from './HeaderSearch';
 
 // 360 x 640
 function Header() {
@@ -37,10 +38,7 @@ function Header() {
         />
       </button>
       {toggleSearch && (
-        <input
-          type="text"
-          data-testid="search-input"
-        />
+        <HeaderSearch />
       )}
     </div>
   );
