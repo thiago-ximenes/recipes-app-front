@@ -1,10 +1,10 @@
 import React from 'react';
-import { Switch, Route} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 export default function Routes() {
   return (
     <Switch>
       <Route exact path="/profile" component={ Profile } />
     </Switch>
-    );
+  );
 }
