@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
+import GlobalProvider from './Context/GlobalProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Routes from './routes/Routes';
+import Routes from './Routes/Routes';
 
 function App() {
   return (
-    <div>
+    <GlobalProvider>
       <Routes />
-    </div>
+    </GlobalProvider>
   );
 }
 
