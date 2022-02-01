@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import MyContext from '../../MyHeaderSearchContext/MyContent';
+import MyContext from '../../Context/MyHeaderSearchContext/MyContent';
 
 function HeaderSearch() {
   const [input, setInput] = useState('');
