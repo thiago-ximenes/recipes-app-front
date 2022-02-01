@@ -1,56 +1,63 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import MyContext from '../../Context/MyHeaderSearchContext/MyContent';
 
 function HeaderSearch() {
-  const [input, setInput] = useState('');
-  const [radioValue, setRadioValue] = useState('');
+  const { setSearchHeaderRadioValue,
+    searchHeaderRadioValue, setSearchHeaderInputValue,
+    searchHeaderInputValue } = useContext(MyContext);
 
-  const { setSearchHeaderRadioValue, setSearchHeaderInputValue } = useContext(MyContext);
+  async function fetchRecipe() {
+    const urlParams = {
+      Ingredient: 'filter.php?i',
+      Name: 'search.php?s',
+      'First Letter': 'search.php?f',
+    };
+
+    const url = `https://www.themealdb.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_').toLowerCase()}`;
+    console.log(url);
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+  }
 
   return (
     <Form>
       <Form.Control
         data-testid="search-input"
-        value={ input }
-        onChange={ (e) => setInput(e.target.value) }
+        value={ searchHeaderInputValue }
+        onChange={ (e) => setSearchHeaderInputValue(e.target.value) }
       />
       <Form.Check
-        checked={ radioValue === 'Ingredient' }
+        checked={ searchHeaderRadioValue === 'Ingredient' }
         value="Ingredient"
         name="search"
         label="Ingredient"
         type="radio"
-        onChange={ (e) => {
-          console.log(e.target.value);
-          setRadioValue(e.target.value);
-        } }
+        onChange={ (e) => setSearchHeaderRadioValue(e.target.value) }
         data-testid="ingredient-search-radio"
       />
       <Form.Check
-        checked={ radioValue === 'Name' }
+        checked={ searchHeaderRadioValue === 'Name' }
         value="Name"
         name="search"
         label="Name"
         type="radio"
-        onChange={ (e) => setRadioValue(e.target.value) }
+        onChange={ (e) => setSearchHeaderRadioValue(e.target.value) }
         data-testid="name-search-radio"
       />
       <Form.Check
-        checked={ radioValue === 'First Letter' }
+        checked={ searchHeaderRadioValue === 'First Letter' }
         value="First Letter"
         name="search"
         label="First Letter"
         type="radio"
-        onChange={ (e) => setRadioValue(e.target.value) }
+        onChange={ (e) => setSearchHeaderRadioValue(e.target.value) }
         data-testid="first-letter-search-radio"
       />
       <Button
         data-testid="exec-search-btn"
-        onClick={ () => {
-          setSearchHeaderInputValue(input);
-          setSearchHeaderRadioValue(radioValue);
-        } }
+        onClick={ () => fetchRecipe() }
       >
         Search
       </Button>

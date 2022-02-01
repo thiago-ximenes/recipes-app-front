@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/Login';
+import Header from '../components/Header/Header';
 
 function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/foods" />
+      <Route exact path="/foods" component={ Header } />
       <Route exact path="/drinks" />
       <Route exact path="/foods/{id-da-receita}" />
       <Route exact path="/drinks/{id-da-receita}" />
