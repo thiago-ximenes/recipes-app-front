@@ -1,20 +1,40 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
-import HeaderSearch from './HeaderSearch';
 import MyHeaderSearchProvider from '../../MyHeaderSearchContext/MyHeaderSearchProvider';
+import HeaderSearch from './HeaderSearch';
 
 // 360 x 640
 function Header() {
   const [toggleSearch, setToggleSearch] = useState(false);
   const history = useHistory();
+  const [isThereButton, setIsThereButton] = useState(true);
+
+  // https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
+  // Como fazer uma string com a primeira letra maiúscula
+
+  const capitalize = history.location.pathname.split('/');
+  const capitalizePathname = capitalize.filter((empty) => empty !== '').map((word) => {
+    const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
+    return capitalizedWord;
+  }).join(' ');
+
+  useEffect(() => {
+    if (capitalizePathname === 'Explore'
+    || capitalizePathname === 'Explore Foods'
+    || capitalizePathname === 'Explore Drinks'
+    || capitalizePathname === 'Explore Foods Ingredients') {
+      setIsThereButton(false);
+    }
+  }, [capitalizePathname]);
 
   return (
     <MyHeaderSearchProvider>
       <div>
         <button
+          src={ profile }
           type="button"
           data-testid="profile-top-btn"
           onClick={ () => history.push('/profile') }
@@ -27,18 +47,21 @@ function Header() {
         <h1
           data-testid="page-title"
         >
-          Profile
+          { capitalizePathname }
         </h1>
-        <button
-          type="button"
-          data-testid="search-top-btn"
-          onClick={ () => setToggleSearch(!toggleSearch) }
-        >
-          <img
+        { isThereButton && (
+          <button
             src={ search }
-            alt="Search Icon"
-          />
-        </button>
+            type="button"
+            data-testid="search-top-btn"
+            onClick={ () => setToggleSearch(!toggleSearch) }
+          >
+            <img
+              src={ search }
+              alt="Search Icon"
+            />
+          </button>
+        ) }
         {toggleSearch && (
           <HeaderSearch />
         )}
