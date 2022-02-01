@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
-import MyHeaderSearchProvider from '../../MyHeaderSearchContext/MyHeaderSearchProvider';
+import MyHeaderSearchProvider
+from '../../Context/MyHeaderSearchContext/MyHeaderSearchProvider';
 import HeaderSearch from './HeaderSearch';
 
 // 360 x 640

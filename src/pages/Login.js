@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import GlobalContext from '../../Context/GlobalContext';
+import GlobalContext from '../Context/GlobalContext';
 
 function Login() {
   const history = useHistory();
