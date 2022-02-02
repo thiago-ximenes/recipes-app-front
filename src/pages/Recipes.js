@@ -1,10 +1,13 @@
 import React from 'react';
+import CardRecipe from '../components/Card/CardRecipe';
+import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
 
 function Recipes() {
   return (
     <div>
-      <h1>Recipes</h1>
+      <Header />
+      <CardRecipe />
       <MenuInferior />
     </div>
   );
