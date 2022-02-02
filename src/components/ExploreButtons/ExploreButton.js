@@ -19,7 +19,11 @@ function ExploreButton(props) {
         type="button"
         onClick={ () => onClick() }
       >
-        {`Explore ${buttonName}`}
+        {(buttonName === 'Foods') && `Explore ${buttonName}`}
+        {(buttonName === 'Drinks') && `Explore ${buttonName}`}
+        {(buttonName === 'Ingredient') && `By ${buttonName}`}
+        {(buttonName === 'Nationality') && `By ${buttonName}`}
+        {(buttonName === 'Surprise') && 'Surprise me!'}
       </button>
     </div>
   );
