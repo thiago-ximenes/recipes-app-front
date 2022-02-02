@@ -1,10 +1,11 @@
 import React from 'react';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
+import Header from '../components/Header/Header';
 
 function ExploreFoodsNationalities() {
   return (
     <div>
-      <h1>ExploreFoodsNationalities</h1>
+      <Header />
       <MenuInferior />
     </div>
   );
