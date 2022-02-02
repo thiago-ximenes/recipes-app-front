@@ -5,9 +5,16 @@ import MyContext from '../../Context/MyHeaderSearchContext/MyContent';
 function HeaderSearch() {
   const { setSearchHeaderRadioValue,
     searchHeaderRadioValue, setSearchHeaderInputValue,
-    searchHeaderInputValue } = useContext(MyContext);
+    searchHeaderInputValue, domainName } = useContext(MyContext);
 
   async function fetchRecipe() {
+    console.log(domainName);
+    let domain = domainName;
+    if (domainName === 'foods') {
+      domain = 'themealdb';
+    } else if (domainName === 'drinks') {
+      domain = 'thecocktaildb';
+    }
     if (searchHeaderRadioValue === 'First Letter' && searchHeaderInputValue.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
@@ -17,7 +24,7 @@ function HeaderSearch() {
       'First Letter': 'search.php?f',
     };
     // https://stackoverflow.com/questions/441018/replacing-spaces-with-underscores-in-javascript
-    const url = `https://www.themealdb.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_').toLowerCase()}`;
+    const url = `https://www.${domain}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_').toLowerCase()}`;
     console.log(url);
     try {
       const response = await fetch(url);
