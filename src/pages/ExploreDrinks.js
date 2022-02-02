@@ -8,8 +8,7 @@ function ExploreDrinks() {
     <div>
       <Header />
       <div className=" d-flex flex-row justify-content-center">
-        <ExploreButton data-testid="explore-by-ingredient" buttonName="Ingredient" />
-        <ExploreButton buttonName="Nationality" />
+        <ExploreButton buttonName="Ingredient" />
         <ExploreButton buttonName="Surprise" />
       </div>
       <MenuInferior />
