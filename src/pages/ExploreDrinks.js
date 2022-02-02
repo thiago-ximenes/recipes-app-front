@@ -8,8 +8,8 @@ function ExploreDrinks() {
     <div>
       <Header />
       <div className=" d-flex flex-row justify-content-center">
-        <SurpriseButtons buttonName="Ingredient" />
-        <SurpriseButtons buttonName="Surprise" />
+        <SurpriseButtons buttonName="Ingredient" typeRecipe="Drinks" />
+        <SurpriseButtons buttonName="Surprise" typeRecipe="Drinks" />
       </div>
       <MenuInferior />
     </div>

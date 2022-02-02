@@ -8,9 +8,9 @@ function ExploreFoods() {
     <div>
       <Header />
       <div className=" d-flex flex-row justify-content-center">
-        <SurpriseButtons buttonName="Ingredient" />
-        <SurpriseButtons buttonName="Nationality" />
-        <SurpriseButtons buttonName="Surprise" />
+        <SurpriseButtons buttonName="Ingredient" typeRecipe="Foods" />
+        <SurpriseButtons buttonName="Nationality" typeRecipe="Foods" />
+        <SurpriseButtons buttonName="Surprise" typeRecipe="Foods" />
       </div>
       <MenuInferior />
     </div>
