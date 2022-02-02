@@ -1,5 +1,6 @@
 import React from 'react';
 import ExploreButton from '../components/ExploreButtons/ExploreButton';
+import MenuInferior from '../components/MenuInferior/MenuInferior';
 
 function Explore() {
   return (
