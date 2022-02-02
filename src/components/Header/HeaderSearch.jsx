@@ -1,39 +1,57 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { Redirect, useHistory } from 'react-router-dom';
 import MyContext from '../../Context/MyHeaderSearchContext/MyContent';
+import fetchApi from '../../services/fetchApi';
 
 function HeaderSearch() {
+  const history = useHistory();
+
+  const [redirect, setRedirect] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState('');
+
   const { setSearchHeaderRadioValue,
     searchHeaderRadioValue, setSearchHeaderInputValue,
-    searchHeaderInputValue, domainName } = useContext(MyContext);
+    searchHeaderInputValue, domainName, setDomainName,
+    setLoading, data, setData } = useContext(MyContext);
 
-  async function fetchRecipe() {
+  useEffect(() => {
+    const domain = history.location.pathname.split('/');
+    console.log(domain);
+    setDomainName(domain[1].toLowerCase());
+  }, []);
+
+  function fetchRecipe() {
+    const firstLetter = 'First Letter';
+    const routeName = domainName === 'foods' ? 'themealdb' : 'thecocktaildb';
     console.log(domainName);
-    let domain = domainName;
-    if (domainName === 'foods') {
-      domain = 'themealdb';
-    } else if (domainName === 'drinks') {
-      domain = 'thecocktaildb';
-    }
-    if (searchHeaderRadioValue === 'First Letter' && searchHeaderInputValue.length > 1) {
+    if (searchHeaderRadioValue === firstLetter && searchHeaderInputValue.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
     const urlParams = {
       Ingredient: 'filter.php?i',
       Name: 'search.php?s',
-      'First Letter': 'search.php?f',
+      [firstLetter]: 'search.php?f',
     };
     // https://stackoverflow.com/questions/441018/replacing-spaces-with-underscores-in-javascript
-    const url = `https://www.${domain}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_').toLowerCase()}`;
-    console.log(url);
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_').toLowerCase()}`;
+    setLoading(true);
+    fetchApi(url).then((result) => setData(result));
+    setLoading(false);
   }
+  useEffect(() => {
+    if (data) {
+      if (data.meals) {
+        if (data.meals.length === 1) {
+          setRedirect(true);
+          setRedirectUrl(`/foods/${data.meals[0].idMeal}`);
+        }
+      } else if (data.drinks && data.drinks.length === 1) {
+        setRedirect(true);
+        setRedirectUrl(`/drinks/${data.drinks[0].idDrink}`);
+      }
+    }
+  }, [data]);
 
   return (
     <Form>
@@ -75,6 +93,11 @@ function HeaderSearch() {
       >
         Search
       </Button>
+      { redirect && <Redirect
+        to={ {
+          pathname: redirectUrl,
+        } }
+      /> }
     </Form>);
 }
 

@@ -5,7 +5,9 @@ import MyContext from './MyContent';
 function MyHeaderSearchProvider({ children }) {
   const [searchHeaderInputValue, setSearchHeaderInputValue] = useState('');
   const [searchHeaderRadioValue, setSearchHeaderRadioValue] = useState('');
+  const [loading, setLoading] = useState(false);
   const [domainName, setDomainName] = useState('');
+  const [data, setData] = useState([]);
 
   return (
     <MyContext.Provider
@@ -16,6 +18,10 @@ function MyHeaderSearchProvider({ children }) {
         setSearchHeaderRadioValue,
         domainName,
         setDomainName,
+        loading,
+        setLoading,
+        data,
+        setData,
       } }
     >
       { children }
