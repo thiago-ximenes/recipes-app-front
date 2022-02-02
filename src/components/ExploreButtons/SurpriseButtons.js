@@ -15,7 +15,7 @@ function SurpriseButtons(props) {
     const url = `https://www.${routeName}.com/api/json/v1/1/random.php`;
 
     fetchApi(url).then((result) => {
-      // console.log(result);
+      console.log(result);
       setData(result);
       // console.log(data.meals);
     });
@@ -28,7 +28,13 @@ function SurpriseButtons(props) {
 
     if (buttonName === 'Ingredient') pathName = `${local}/${buttonName.toLowerCase()}s`;
     if (buttonName === 'Nationality') pathName = `${local}/nationalities`;
-    if (buttonName === 'Surprise') pathName = `foods/:${data.typeRecipe[0].idMeal}`;
+    if (buttonName === 'Surprise') {
+      if (typeRecipe === 'Foods') {
+        pathName = `foods/${data.meals[0].idMeal}`;
+      } else {
+        pathName = `drinks/${data.drinks[0].idDrink}`;
+      }
+    }
 
     history.push(pathName);
   };
