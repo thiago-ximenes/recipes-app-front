@@ -33,7 +33,7 @@ function Header() {
 
   return (
     <MyHeaderSearchProvider>
-      <div>
+      <div className=" d-flex flex-row justify-content-between">
         <button
           src={ profile }
           type="button"
