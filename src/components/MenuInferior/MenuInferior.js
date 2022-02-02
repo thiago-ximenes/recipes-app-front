@@ -5,7 +5,10 @@ import FoodIcon from '../../images/mealIcon.svg';
 
 export default function MenuInferior() {
   return (
-    <footer data-testid="footer">
+    <footer
+      className="fixed-bottom d-flex justify-content-between"
+      data-testid="footer"
+    >
       <button data-testid="food-bottom-btn" type="button" source={ FoodIcon }>
         <img src={ FoodIcon } alt="ilustração com taça" />
       </button>
