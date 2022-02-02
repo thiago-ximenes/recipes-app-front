@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Explore from '../pages/Explore';
 import Login from '../pages/Login';
 import Recipes from '../pages/Recipes';
-import Explore from '../pages/Explore';
 import ExploreFoods from '../pages/ExploreFoods';
 import ExploreDrinks from '../pages/ExploreDrinks';
 import ExploreFoodIngredients from '../pages/ExploreFoodIngredients';
