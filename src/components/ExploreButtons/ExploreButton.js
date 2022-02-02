@@ -15,7 +15,11 @@ function ExploreButton(props) {
   return (
     <div>
       <button
-        data-testid={ `explore-${buttonName.toLowerCase()}` }
+        data-testid={
+          buttonName !== 'Foods' && buttonName !== 'Drinks' && buttonName !== 'Surprise'
+            ? `explore-by-${buttonName.toLowerCase()}`
+            : `explore-${buttonName.toLowerCase()}`
+        }
         type="button"
         onClick={ () => onClick() }
       >

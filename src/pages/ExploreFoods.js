@@ -7,9 +7,11 @@ function ExploreFoods() {
   return (
     <div>
       <Header />
-      <ExploreButton buttonName="Ingredient" />
-      <ExploreButton buttonName="Nationality" />
-      <ExploreButton buttonName="Surprise" />
+      <div className=" d-flex flex-row justify-content-center">
+        <ExploreButton buttonName="Ingredient" />
+        <ExploreButton buttonName="Nationality" />
+        <ExploreButton buttonName="Surprise" />
+      </div>
       <MenuInferior />
     </div>
   );
