@@ -1,16 +1,16 @@
 import React from 'react';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
 import Header from '../components/Header/Header';
-import ExploreFoodDrinkButtons from '../components/ExploreButtons/ExploreButton';
+import SurpriseButtons from '../components/ExploreButtons/SurpriseButtons';
 
 function ExploreFoods() {
   return (
     <div>
       <Header />
       <div className=" d-flex flex-row justify-content-center">
-        <ExploreFoodDrinkButtons buttonName="Ingredient" />
-        <ExploreFoodDrinkButtons buttonName="Nationality" />
-        <ExploreFoodDrinkButtons buttonName="Surprise" />
+        <SurpriseButtons buttonName="Ingredient" />
+        <SurpriseButtons buttonName="Nationality" />
+        <SurpriseButtons buttonName="Surprise" />
       </div>
       <MenuInferior />
     </div>
