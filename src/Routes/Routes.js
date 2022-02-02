@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/Login';
+import Profile from '../pages/Profile';
 
 function Routes() {
   return (
@@ -18,7 +19,7 @@ function Routes() {
       <Route exact path="/explore/foods/ingredients" />
       <Route exact path="/explore/drinks/ingredients" />
       <Route exact path="/explore/foods/nationalities" />
-      <Route exact path="/profile" />
+      <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" />
       <Route exact path="/favorite-recipes" />
     </Switch>
