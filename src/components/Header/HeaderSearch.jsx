@@ -17,14 +17,12 @@ function HeaderSearch() {
 
   useEffect(() => {
     const domain = history.location.pathname.split('/');
-    console.log(domain);
     setDomainName(domain[1].toLowerCase());
   }, []);
 
   function fetchRecipe() {
     const firstLetter = 'First Letter';
     const routeName = domainName === 'foods' ? 'themealdb' : 'thecocktaildb';
-    console.log(domainName);
     if (searchHeaderRadioValue === firstLetter && searchHeaderInputValue.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
@@ -34,12 +32,16 @@ function HeaderSearch() {
       [firstLetter]: 'search.php?f',
     };
     // https://stackoverflow.com/questions/441018/replacing-spaces-with-underscores-in-javascript
-    const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_').toLowerCase()}`;
+    const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_')}`;
     setLoading(true);
-    fetchApi(url).then((result) => setData(result));
+    fetchApi(url).then((result) => {
+      // console.log(result);
+      setData(result);
+    });
     setLoading(false);
   }
   useEffect(() => {
+    // console.log(data);
     if (data) {
       if (data.meals) {
         if (data.meals.length === 1) {
