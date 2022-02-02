@@ -1,9 +1,12 @@
 import React from 'react';
+import DrinkButton from '../components/ExploreButtons/DrinksButton';
+import FoodButton from '../components/ExploreButtons/FoodButton';
 
 function Explore() {
   return (
     <div>
-      <h1>Explore</h1>
+      <FoodButton />
+      <DrinkButton />
     </div>
   );
 }
