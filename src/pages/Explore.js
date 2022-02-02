@@ -1,12 +1,12 @@
 import React from 'react';
-import DrinkButton from '../components/ExploreButtons/DrinksButton';
-import FoodButton from '../components/ExploreButtons/FoodButton';
+import ExploreButton from '../components/ExploreButtons/ExploreButton';
 
 function Explore() {
   return (
     <div>
-      <FoodButton />
-      <DrinkButton />
+      {/* // buttonName via props */}
+      <ExploreButton buttonName="Foods" />
+      <ExploreButton buttonName="Drinks" />
     </div>
   );
 }
