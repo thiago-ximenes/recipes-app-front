@@ -3,7 +3,7 @@ import MenuInferior from '../components/MenuInferior/MenuInferior';
 import Header from '../components/Header/Header';
 import Ingredients from '../components/renderIngredients/Ingredients';
 
-function ExploreFoodsIngredients() {
+function ExploreIngredients() {
   return (
     <div>
       <Header />
@@ -13,4 +13,4 @@ function ExploreFoodsIngredients() {
   );
 }
 
-export default ExploreFoodsIngredients;
+export default ExploreIngredients;

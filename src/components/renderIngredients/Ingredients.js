@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import fetchApi from '../../services/fetchApi';
 
 export default function Ingredients() {
-  const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+  const history = useHistory();
+  const domainName = history.location.pathname;
+  const routeName = domainName.includes('foods') ? 'themealdb' : 'thecocktaildb';
+  const tipo = routeName === 'themealdb' ? 'meals' : 'drinks';
+
+  const url = `https://www.${routeName}.com/api/json/v1/1/list.php?i=list`;
   const [allIngredients, setAllIngredients] = useState();
-  const treze = 13;
+  const doze = 12;
   const fetchIngredients = () => {
     fetchApi(url).then((result) => {
       setAllIngredients(result);
@@ -19,26 +25,27 @@ export default function Ingredients() {
     <div>
       {
         allIngredients !== undefined
-        && console.log(
-          allIngredients.meals.filter((item) => Number(item.idIngredient) < treze),
-        )
+        && allIngredients[tipo]
+          .filter((item, index) => index < doze)
+          .map((ingdt, index) => {
+            const img = `https://www.${routeName}.com/images/ingredients/${ingdt.strIngredient}-Small.png`;
+            return (
+              <div
+                key={ index }
+                data-testid={ `${index}-ingredient-card` }
+              >
+                <p data-testid={ `${index}-card-name` }>
+                  { ingdt.strIngredient }
+                </p>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  alt={ ingdt.strIngredient }
+                  src={ img }
+                />
+              </div>
+            );
+          })
       }
-
-      {/* {
-        allIngredients !== undefined
-        && allIngredients
-          .map((item) => console.log(item))
-          .map((alimentos) => (
-            <div
-              key={ alimentos.idIngredient }
-              data-testid={ `${alimentos.srtIngredient}-ingredient-card` }
-            >
-              <p>{alimentos.srtIngredient}</p>
-            </div>
-          ))
-      } */}
-
-      {/* { console.log(allIngredients) } */}
 
     </div>
   );
