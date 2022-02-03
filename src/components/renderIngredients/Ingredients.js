@@ -28,6 +28,9 @@ export default function Ingredients() {
         && allIngredients[tipo]
           .filter((item, index) => index < doze)
           .map((ingdt, index) => {
+            if (tipo === 'drinks') {
+              ingdt.strIngredient = ingdt.strIngredient1;
+            }
             const img = `https://www.${routeName}.com/images/ingredients/${ingdt.strIngredient}-Small.png`;
             return (
               <div
