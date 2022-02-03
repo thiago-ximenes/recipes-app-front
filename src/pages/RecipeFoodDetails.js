@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DetailCard from '../components/DetailCard/DetailCard';
 import { getFoodDetails } from '../Services/index';
-import StartRecipeButton from '../components/StarRecipeButtons/StartRecipeButtons';
+import StartFoodButton from '../components/StartRecipeButtons/StartFoodButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import VideoFood from '../components/RecipesDetailsPage/VideoFood';
 import Recomendation from '../components/RecipesDetailsPage/Recomendation';
@@ -14,13 +14,18 @@ function RecipeFoodDetails(props) {
   const { match: { params: { id } } } = props;
   // state padrão da recipe a ser detalhada
   const [foodRecipeDetail, setFoodRecipeDetail] = useState({});
+  const [drinkRecomendation, setDrinkRecomendation] = useState({});
 
   useEffect(() => {
     getFoodDetails(id)
       .then((response) => setFoodRecipeDetail(response.meals[0]));
+    // console.log(foodRecipeDetail);
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+      .then((response) => setDrinkRecomendation(response));
+    console.log(drinkRecomendation);
   }, []);
 
-  console.log(foodRecipeDetail);
+  // console.log(foodRecipeDetail);
 
   const [ingredients, setIngredients] = useState([]);
 
@@ -72,14 +77,10 @@ function RecipeFoodDetails(props) {
       <VideoFood
         videoFoods={ foodRecipeDetail.strYoutube }
       />
-      {/* <RecipeDetailButton
-        buttonName="Favorite"
-        dataTestId="favorite-btn"
-      /> */}
-      <Recomendation />
-      <FavoriteButton />
       <ShareButton />
-      <StartRecipeButton
+      <FavoriteButton />
+      <Recomendation recomendation={ drinkRecomendation } />
+      <StartFoodButton
         name="food"
         id={ foodRecipeDetail.idMeal }
       />

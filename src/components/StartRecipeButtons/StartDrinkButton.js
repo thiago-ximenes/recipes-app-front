@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import '../../style/style.css';
 
-function StartRecipeButton(props) {
+function StartDrinkButton(props) {
   const { name, id } = props;
   const history = useHistory();
   const onClick = () => {
     // aparentemente há um problema nesse redirecionamento
     // talvez duplicar essa botão um para cada página
-    if (name === 'foods') {
-      history.push(`/foods/${id}/in-progress`);
-    } else {
-      history.push(`/drinks/${id}/in-progress`);
-    }
+    // if (name === 'foods') {
+    //   history.push(`/foods/${id}/in-progress`);
+    // } else {
+    history.push(`/drinks/${id}/in-progress`);
   };
   return (
     <div>
@@ -30,9 +29,9 @@ function StartRecipeButton(props) {
   );
 }
 
-StartRecipeButton.propTypes = {
+StartDrinkButton.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 
-export default StartRecipeButton;
+export default StartDrinkButton;

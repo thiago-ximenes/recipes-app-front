@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DetailCard from '../components/DetailCard/DetailCard';
 import { getDrinksDetails } from '../Services/index';
-import StartRecipeButton from '../components/StarRecipeButtons/StartRecipeButtons';
+import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import Recomendation from '../components/RecipesDetailsPage/Recomendation';
 import ShareButton from '../components/RecipesDetailsPage/ShareButton';
@@ -13,10 +13,14 @@ function RecipeDrinksDetails(props) {
   const { match: { params: { id } } } = props;
   // state padrão da recipe a ser detalhada
   const [drinkRecipeDetail, setDrinkRecipeDetail] = useState({});
+  const [foodRecomendation, setFoodRecomendation] = useState({});
 
   useEffect(() => {
     getDrinksDetails(id)
       .then((response) => setDrinkRecipeDetail(response.drinks[0]));
+    fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+      .then((response) => setFoodRecomendation(response));
+    console.log(foodRecomendation);
   }, []);
 
   console.log(drinkRecipeDetail);
@@ -67,10 +71,10 @@ function RecipeDrinksDetails(props) {
         instructions={ drinkRecipeDetail.strInstructions }
       />
       <Ingredients ingredients={ ingredients } measures={ measures } />
-      <FavoriteButton />
       <ShareButton />
-      <Recomendation />
-      <StartRecipeButton
+      <FavoriteButton />
+      <Recomendation recomendation={ foodRecomendation } />
+      <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }
       />

@@ -3,6 +3,17 @@ import whiteHeart from '../../images/whiteHeartIcon.svg';
 // import blackHeart from '../../images/blackHeartIcon.svg';
 
 function FavoriteButton() {
+  // doneRecipes: [{
+  //   id: '',
+  //   type: '',
+  //   nationality: '',
+  //   category: '',
+  //   alcoholicOrNot: '',
+  //   name: '',
+  //   image: '',
+  //   doneDate: '',
+  //   tags: '',
+  // }],
   return (
     <div>
       <button
