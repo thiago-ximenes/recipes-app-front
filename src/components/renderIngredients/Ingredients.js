@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import MyContext from '../../Context/MyHeaderSearchContext/MyContent';
 import fetchApi from '../../services/fetchApi';
 
 export default function Ingredients() {
+  const { setData } = useContext(MyContext);
+
   const history = useHistory();
   const domainName = history.location.pathname;
   const routeName = domainName.includes('foods') ? 'themealdb' : 'thecocktaildb';
@@ -21,6 +24,16 @@ export default function Ingredients() {
     fetchIngredients();
   }, []);
 
+  const onClick = (name) => {
+    const filtrarClick = `https://www.${routeName}.com/api/json/v1/1//filter.php?i=${name}`;
+
+    fetchApi(filtrarClick).then((result) => {
+      setData(result);
+    });
+
+    history.push('/foods');
+  };
+
   return (
     <div>
       {
@@ -33,9 +46,11 @@ export default function Ingredients() {
             }
             const img = `https://www.${routeName}.com/images/ingredients/${ingdt.strIngredient}-Small.png`;
             return (
-              <div
+              <button
+                type="button"
                 key={ index }
                 data-testid={ `${index}-ingredient-card` }
+                onClick={ () => onClick(ingdt.strIngredient) }
               >
                 <p data-testid={ `${index}-card-name` }>
                   { ingdt.strIngredient }
@@ -45,7 +60,7 @@ export default function Ingredients() {
                   alt={ ingdt.strIngredient }
                   src={ img }
                 />
-              </div>
+              </button>
             );
           })
       }
