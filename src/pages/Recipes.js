@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Card, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { Card, Container, Row } from 'react-bootstrap';
 import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
 import MyContext from '../Context/MyHeaderSearchContext/MyContent';
@@ -8,14 +8,13 @@ import MyContext from '../Context/MyHeaderSearchContext/MyContent';
 function Recipes() {
   const history = useHistory();
 
-  const { loading, data } = useContext(MyContext);
+  const { loading, data, setData } = useContext(MyContext);
 
   const [recipeType, setRecipeType] = useState('meals');
 
   useEffect(() => {
     const domainName = history.location.pathname.split('/')[1];
     const routName = domainName === 'foods' ? 'meals' : 'drinks';
-    console.log(routName);
     setRecipeType(routName);
   }, []);
 
@@ -24,19 +23,23 @@ function Recipes() {
 
   const ELEVEN = 11;
 
+  if (data && data[recipeType] === null) {
+    global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    setData(data[recipeType] = []);
+  }
+
   function renderData() {
     let result = [];
-    if (data[recipeType].length > 1) {
+    if (data[recipeType] && data[recipeType].length > 1) {
       result = data[recipeType].map((recipe, index) => {
         if (index <= ELEVEN) {
           return (
             <Row
               className="justify-content-md-center"
-              data-testid={ `${index}-recipe-card` }
+              key={ `${index.toString()}-card-name` }
             >
               <Card
                 style={ { width: '18rem' } }
-                key={ index }
               >
                 <Card.Title
                   data-testid={ `${index.toString()}-card-name` }
@@ -58,20 +61,20 @@ function Recipes() {
     return result;
   }
 
+  console.log(data);
+
   return (
-    !loading && (
+    !loading ? (
       <div>
         <Header />
-        <Container
-          fluid="sm"
-        >
-          { !data[recipeType]
-            ? (
-              <h2>Recipes</h2>
-            ) : renderData()}
-        </Container>
+        { data.length
+          ? (
+            <h2>{ console.log(data) }</h2>
+          ) : renderData()}
         <MenuInferior />
       </div>
+    ) : (
+      <h2>Loading...</h2>
     )
   );
 }
