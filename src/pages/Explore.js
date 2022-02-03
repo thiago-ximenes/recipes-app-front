@@ -1,10 +1,15 @@
 import React from 'react';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
+import Header from '../components/Header/Header';
+import ExploreButton from '../components/ExploreButtons/ExploreButton';
 
 function Explore() {
   return (
     <div>
-      <h1>Explore</h1>
+      <Header />
+      {/* // buttonName via props */}
+      <ExploreButton buttonName="Foods" />
+      <ExploreButton buttonName="Drinks" />
       <MenuInferior />
     </div>
   );

@@ -1,13 +1,17 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import './App.css';
 import GlobalProvider from './Context/GlobalProvider';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './Routes/Routes';
+import MyHeaderSearchProvider
+from './Context/MyHeaderSearchContext/MyHeaderSearchProvider';
 
 function App() {
   return (
     <GlobalProvider>
-      <Routes />
+      <MyHeaderSearchProvider>
+        <Routes />
+      </MyHeaderSearchProvider>
     </GlobalProvider>
   );
 }
