@@ -14,11 +14,15 @@ function GlobalProvider({ children }) {
     cocktailsToken: '',
   });
 
+  const [domainNameUrl, setDomainName] = useState('foods');
+
   const contextValues = {
     login,
     setLogin,
     localStorageToken,
     setLocalStorageToken,
+    domainNameUrl,
+    setDomainName,
   };
 
   return (
