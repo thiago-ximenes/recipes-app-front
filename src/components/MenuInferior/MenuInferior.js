@@ -20,8 +20,8 @@ export default function MenuInferior() {
         type="button"
         src={ FoodIcon }
         onClick={ () => {
-          history.push('/foods');
           setDomainName('foods');
+          history.push('/foods');
         } }
       >
         <img src={ FoodIcon } alt="ilustração com taça" />

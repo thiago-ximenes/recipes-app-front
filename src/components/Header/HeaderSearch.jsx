@@ -39,13 +39,11 @@ function HeaderSearch() {
     const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue}`;
     setLoading(true);
     fetchApi(url).then((result) => {
-      // console.log(result);
       setData(result);
     });
     setLoading(false);
   }
   useEffect(() => {
-    console.log(data);
     if (data) {
       if (data.meals) {
         if (data.meals.length === 1) {

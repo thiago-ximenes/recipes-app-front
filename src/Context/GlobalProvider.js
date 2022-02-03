@@ -14,7 +14,7 @@ function GlobalProvider({ children }) {
     cocktailsToken: '',
   });
 
-  const [domainNameUrl, setDomainName] = useState('foods');
+  const [domainNameUrl, setDomainName] = useState('');
 
   const contextValues = {
     login,

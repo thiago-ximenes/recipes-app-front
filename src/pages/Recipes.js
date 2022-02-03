@@ -19,22 +19,19 @@ function Recipes() {
     const domainName = history.location.pathname.split('/')[1];
     const routName = domainName === 'foods' ? 'meals' : 'drinks';
     setRecipeType(routName);
-    console.log('entrou no primeiro');
   }, []);
 
   useEffect(() => {
-    const domainName = history.location.pathname.split('/')[1];
-    const domainUrl = domainNameUrl === 'foods' ? 'themealdb' : 'thecocktaildb';
+    let domainName = history.location.pathname.split('/')[1];
+    domainName = domainNameUrl === domainName ? domainNameUrl : domainName;
+    const domainUrl = domainName === 'foods' ? 'themealdb' : 'thecocktaildb';
+
     const url = `https://www.${domainUrl}.com/api/json/v1/1/search.php?s=`;
     setLoading(true);
     fetch(url).then((response) => response.json()).then((result) => setData(result));
-    const routName = domainNameUrl === 'foods' ? 'meals' : 'drinks';
-    if (domainName === 'foods') {
-      setRecipeType(routName);
-    }
-
+    const routName = domainName === 'foods' ? 'meals' : 'drinks';
+    setRecipeType(routName);
     setLoading(false);
-    console.log('entrou no segundo');
   }, [domainNameUrl]);
 
   const recipeTypeCapitalized = recipeType.charAt(0)
@@ -48,7 +45,6 @@ function Recipes() {
   }
 
   function renderData() {
-    console.log('renderData');
     const result = data[recipeType].map((recipe, index) => {
       if (index <= ELEVEN) {
         return (
@@ -78,8 +74,6 @@ function Recipes() {
     });
     return result;
   }
-
-  console.log(data);
 
   return (
     !loading ? (
