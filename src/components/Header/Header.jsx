@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
@@ -29,40 +30,48 @@ function Header() {
   }, []);
 
   return (
-    <div className=" d-flex flex-row justify-content-between">
-      <button
-        src={ profile }
-        type="button"
-        data-testid="profile-top-btn"
-        onClick={ () => history.push('/profile') }
+    <Container>
+      <Row
+        className="justify-content-between"
       >
-        <img
-          src={ profile }
-          alt="Profile Icon"
-        />
-      </button>
-      <h1
-        data-testid="page-title"
-      >
-        { capitalizePathname }
-      </h1>
-      { isThereButton && (
         <button
-          src={ search }
+          src={ profile }
           type="button"
-          data-testid="search-top-btn"
-          onClick={ () => setToggleSearch(!toggleSearch) }
+          data-testid="profile-top-btn"
+          onClick={ () => history.push('/profile') }
         >
           <img
-            src={ search }
-            alt="Search Icon"
+            src={ profile }
+            alt="Profile Icon"
           />
         </button>
-      ) }
-      {toggleSearch && (
-        <HeaderSearch />
-      )}
-    </div>
+        <h1
+          data-testid="page-title"
+        >
+          { capitalizePathname }
+        </h1>
+        { isThereButton && (
+          <button
+            src={ search }
+            type="button"
+            data-testid="search-top-btn"
+            onClick={ () => setToggleSearch(!toggleSearch) }
+          >
+            <img
+              src={ search }
+              alt="Search Icon"
+            />
+          </button>
+        ) }
+      </Row>
+      <Row
+        className="justify-content-between"
+      >
+        {toggleSearch && (
+          <HeaderSearch />
+        )}
+      </Row>
+    </Container>
   );
 }
 

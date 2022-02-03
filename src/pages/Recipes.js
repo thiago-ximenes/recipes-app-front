@@ -29,35 +29,34 @@ function Recipes() {
   }
 
   function renderData() {
-    let result = [];
-    if (data[recipeType] && data[recipeType].length > 1) {
-      result = data[recipeType].map((recipe, index) => {
-        if (index <= ELEVEN) {
-          return (
-            <Row
-              className="justify-content-md-center"
-              key={ `${index.toString()}-card-name` }
+    console.log('renderData');
+    const result = data[recipeType].map((recipe, index) => {
+      if (index <= ELEVEN) {
+        return (
+          <Row
+            className="justify-content-center"
+            key={ `${index.toString()}-card-name` }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Card
+              style={ { width: '18rem' } }
             >
-              <Card
-                style={ { width: '18rem' } }
+              <Card.Title
+                data-testid={ `${index.toString()}-card-name` }
               >
-                <Card.Title
-                  data-testid={ `${index.toString()}-card-name` }
-                >
-                  {recipe[`str${recipeTypeCapitalized}`]}
-                </Card.Title>
-                <img
-                  alt={ `${recipe[`str${recipeTypeCapitalized}`]}` }
-                  src={ recipe[`str${recipeTypeCapitalized}Thumb`] }
-                  data-testid={ `${index.toString()}-card-img` }
-                />
-              </Card>
-            </Row>
-          );
-        }
-        return null;
-      });
-    }
+                {recipe[`str${recipeTypeCapitalized}`]}
+              </Card.Title>
+              <img
+                alt={ `${recipe[`str${recipeTypeCapitalized}`]}` }
+                src={ recipe[`str${recipeTypeCapitalized}Thumb`] }
+                data-testid={ `${index.toString()}-card-img` }
+              />
+            </Card>
+          </Row>
+        );
+      }
+      return null;
+    });
     return result;
   }
 
@@ -65,9 +64,7 @@ function Recipes() {
     !loading ? (
       <div>
         <Header />
-        { !data[recipeType] ? (
-          <h2>Recipe</h2>
-        ) : renderData()}
+        { data && data[recipeType] && data[recipeType].length > 1 && renderData()}
         <MenuInferior />
       </div>
     ) : (

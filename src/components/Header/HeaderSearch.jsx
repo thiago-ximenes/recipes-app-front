@@ -20,6 +20,10 @@ function HeaderSearch() {
     setDomainName(domain[1].toLowerCase());
   }, []);
 
+  useEffect(() => {
+    console.log('chamou no HeaderSearch', data);
+  });
+
   function fetchRecipe() {
     const firstLetter = 'First Letter';
     const routeName = domainName === 'foods' ? 'themealdb' : 'thecocktaildb';
@@ -33,7 +37,6 @@ function HeaderSearch() {
     };
     // https://stackoverflow.com/questions/441018/replacing-spaces-with-underscores-in-javascript
     const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue}`;
-    console.log(url);
     setLoading(true);
     fetchApi(url).then((result) => {
       // console.log(result);
