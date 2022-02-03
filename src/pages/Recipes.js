@@ -61,16 +61,13 @@ function Recipes() {
     return result;
   }
 
-  console.log(data);
-
   return (
     !loading ? (
       <div>
         <Header />
-        { data.length
-          ? (
-            <h2>{ console.log(data) }</h2>
-          ) : renderData()}
+        { !data[recipeType] ? (
+          <h2>Recipe</h2>
+        ) : renderData()}
         <MenuInferior />
       </div>
     ) : (

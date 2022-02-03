@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import MyContext from '../../Context/MyHeaderSearchContext/MyContent';
 import fetchApi from '../../services/fetchApi';
 
@@ -32,7 +32,8 @@ function HeaderSearch() {
       [firstLetter]: 'search.php?f',
     };
     // https://stackoverflow.com/questions/441018/replacing-spaces-with-underscores-in-javascript
-    const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue.replace(/ /g, '_')}`;
+    const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue}`;
+    console.log(url);
     setLoading(true);
     fetchApi(url).then((result) => {
       // console.log(result);
@@ -95,11 +96,7 @@ function HeaderSearch() {
       >
         Search
       </Button>
-      { redirect && <Redirect
-        to={ {
-          pathname: redirectUrl,
-        } }
-      /> }
+      { redirect && history.push(redirectUrl) }
     </Form>);
 }
 
