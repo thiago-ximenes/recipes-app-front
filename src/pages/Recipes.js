@@ -1,34 +1,74 @@
-import React, { useContext } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Card, Row } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
 import MyContext from '../Context/MyHeaderSearchContext/MyContent';
 
 function Recipes() {
-  const { loading, data } = useContext(MyContext);
+  const history = useHistory();
+
+  const { loading, data, setData } = useContext(MyContext);
+
+  const [recipeType, setRecipeType] = useState('meals');
+
+  useEffect(() => {
+    const domainName = history.location.pathname.split('/')[1];
+    const routName = domainName === 'foods' ? 'meals' : 'drinks';
+    setRecipeType(routName);
+  }, []);
+
+  const recipeTypeCapitalized = recipeType.charAt(0)
+    .toUpperCase() + recipeType.slice(1, recipeType.length - 1);
+
+  const ELEVEN = 11;
+
+  if (data && data[recipeType] === null) {
+    global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    setData(data[recipeType] = []);
+  }
+
+  function renderData() {
+    console.log('renderData');
+    const result = data[recipeType].map((recipe, index) => {
+      if (index <= ELEVEN) {
+        return (
+          <Row
+            className="justify-content-center"
+            key={ `${index.toString()}-card-name` }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Card
+              style={ { width: '18rem' } }
+            >
+              <Card.Title
+                data-testid={ `${index.toString()}-card-name` }
+              >
+                {recipe[`str${recipeTypeCapitalized}`]}
+              </Card.Title>
+              <img
+                alt={ `${recipe[`str${recipeTypeCapitalized}`]}` }
+                src={ recipe[`str${recipeTypeCapitalized}Thumb`] }
+                data-testid={ `${index.toString()}-card-img` }
+              />
+            </Card>
+          </Row>
+        );
+      }
+      return null;
+    });
+    return result;
+  }
 
   return (
-    !loading && (
+    !loading ? (
       <div>
         <Header />
-        { data.length > 0 && (
-          <Card style={ { width: '18rem' } }>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-              </Card.Text>
-              <Button
-                variant="primary"
-              >
-                Go somewhere
-
-              </Button>
-            </Card.Body>
-          </Card>) }
+        { data && data[recipeType] && data[recipeType].length > 1 && renderData()}
         <MenuInferior />
       </div>
+    ) : (
+      <h2>Loading...</h2>
     )
   );
 }
