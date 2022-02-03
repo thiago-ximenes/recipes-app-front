@@ -41,7 +41,7 @@ function HeaderSearch() {
     setLoading(false);
   }
   useEffect(() => {
-    // console.log(data);
+    console.log(data);
     if (data) {
       if (data.meals) {
         if (data.meals.length === 1) {

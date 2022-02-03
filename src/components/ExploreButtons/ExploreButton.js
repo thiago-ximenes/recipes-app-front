@@ -7,15 +7,16 @@ function ExploreButton(props) {
   const { buttonName } = props;
 
   const onClick = () => {
-    // buttonName é o name do button
-    const pathName = `/explore/${buttonName.toLowerCase()}`;
+    const pathName = `explore/${buttonName.toLowerCase()}`;
     history.push(pathName);
   };
 
   return (
     <div>
       <button
-        data-testid={ `explore-${buttonName.toLowerCase()}` }
+        data-testid={
+          `explore-${buttonName.toLowerCase()}`
+        }
         type="button"
         onClick={ () => onClick() }
       >
