@@ -64,7 +64,7 @@ function Recipes() {
     !loading ? (
       <div>
         <Header />
-        { data && data[recipeType] && data[recipeType].length > 1 && renderData()}
+        { (data && data[recipeType] && data[recipeType].length > 1) && renderData()}
         <MenuInferior />
       </div>
     ) : (
