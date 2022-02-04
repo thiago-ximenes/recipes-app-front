@@ -18,7 +18,7 @@ function GlobalProvider({ children }) {
 
   const [categoryType, setCategoryType] = useState('meals');
 
-  const [data, setData] = useState([]);
+  const [categories, setCategories] = useState('');
 
   const contextValues = {
     login,
@@ -29,8 +29,8 @@ function GlobalProvider({ children }) {
     setDomainName,
     categoryType,
     setCategoryType,
-    data,
-    setData,
+    categories,
+    setCategories,
   };
 
   return (

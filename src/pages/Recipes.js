@@ -84,7 +84,7 @@ function Recipes() {
       <div>
         <Header />
         <ButtonCategory />
-        { data && data[recipeType] && data[recipeType].length > 1 && renderData()}
+        { data && data[recipeType] && data[recipeType].length && renderData()}
         <MenuInferior />
       </div>
     ) : (
