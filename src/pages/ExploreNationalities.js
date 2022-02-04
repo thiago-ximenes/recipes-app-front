@@ -2,7 +2,7 @@ import React from 'react';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
 import Header from '../components/Header/Header';
 
-function ExploreNationality() {
+function ExploreNationalities() {
   return (
     <div>
       <Header />
@@ -11,4 +11,4 @@ function ExploreNationality() {
   );
 }
 
-export default ExploreNationality;
+export default ExploreNationalities;

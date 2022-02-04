@@ -5,7 +5,7 @@ import Explore from '../pages/Explore';
 import ExploreDrinks from '../pages/ExploreDrinks';
 import ExploreIngredients from '../pages/ExploreIngredients';
 import ExploreFoods from '../pages/ExploreFoods';
-import ExploreFoodsNationalities from '../pages/ExploreFoodsNationalities';
+import ExploreNationalities from '../pages/ExploreNationalities';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
@@ -37,7 +37,7 @@ function Routes() {
       <Route
         exact
         path="/explore/foods/nationalities"
-        component={ ExploreFoodsNationalities }
+        component={ ExploreNationalities }
       />
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
