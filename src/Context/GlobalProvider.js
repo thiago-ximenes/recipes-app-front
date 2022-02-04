@@ -16,6 +16,10 @@ function GlobalProvider({ children }) {
 
   const [domainNameUrl, setDomainName] = useState('');
 
+  const [categoryType, setCategoryType] = useState('meals');
+
+  const [data, setData] = useState([]);
+
   const contextValues = {
     login,
     setLogin,
@@ -23,6 +27,10 @@ function GlobalProvider({ children }) {
     setLocalStorageToken,
     domainNameUrl,
     setDomainName,
+    categoryType,
+    setCategoryType,
+    data,
+    setData,
   };
 
   return (

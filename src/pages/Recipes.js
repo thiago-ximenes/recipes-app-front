@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import ButtonCategory from '../components/ButtonCategory/ButtonCategory';
 import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior/MenuInferior';
 import GlobalContext from '../Context/GlobalContext';
@@ -28,7 +29,10 @@ function Recipes() {
 
     const url = `https://www.${domainUrl}.com/api/json/v1/1/search.php?s=`;
     setLoading(true);
-    fetch(url).then((response) => response.json()).then((result) => setData(result));
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => setData(result));
+
     const routName = domainName === 'foods' ? 'meals' : 'drinks';
     setRecipeType(routName);
     setLoading(false);
@@ -79,6 +83,7 @@ function Recipes() {
     !loading ? (
       <div>
         <Header />
+        <ButtonCategory />
         { data && data[recipeType] && data[recipeType].length > 1 && renderData()}
         <MenuInferior />
       </div>
