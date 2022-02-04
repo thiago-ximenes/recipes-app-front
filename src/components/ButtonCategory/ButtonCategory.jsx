@@ -1,11 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
+import MyContext from '../../Context/MyHeaderSearchContext/MyContent';
+import fetchByCategory from '../../services/fetchByCategory';
 
 function ButtonCategory() {
   const history = useHistory();
-  const { domainNameUrl, data, setData } = useContext(GlobalContext);
+  const { domainNameUrl, categories, setCategories } = useContext(GlobalContext);
+  const { setData, setLoading } = useContext(MyContext);
   const [categoryType, setCategoryType] = useState('meals');
 
   useEffect(() => {
@@ -16,21 +19,31 @@ function ButtonCategory() {
     const url = `https://www.${domainUrl}.com/api/json/v1/1/list.php?c=list`;
     fetch(url)
       .then((response) => response.json())
-      .then((result) => setData(result));
+      .then((result) => setCategories(result));
 
     const routName = domainName === 'foods' ? 'meals' : 'drinks';
     setCategoryType(routName);
   }, [domainNameUrl]);
 
+  function setCategoryData(category) {
+    setLoading(true);
+    fetchByCategory(category, categoryType)
+      .then((categoryData) => {
+        setData(categoryData);
+      });
+    setLoading(false);
+  }
+
   const FOUR = 4;
   function renderButtons() {
-    const result = data[categoryType].map((category, index) => {
+    const result = categories[categoryType].map((category, index) => {
       if (index <= FOUR) {
         return (
           <Button
             key={ index }
             variant="secondary"
             data-testid={ `${category.strCategory}-category-filter` }
+            onClick={ () => setCategoryData(category.strCategory) }
           >
             {category.strCategory}
           </Button>
@@ -40,9 +53,10 @@ function ButtonCategory() {
     });
     return result;
   }
+
   return (
     <div>
-      {data && data[categoryType] && renderButtons()}
+      {categories && categories[categoryType] && renderButtons()}
     </div>
   );
 }
