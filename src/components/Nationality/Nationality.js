@@ -11,6 +11,7 @@ export default function Nationality() {
   const type = domainName === 'themealdb' ? 'meals' : 'drinks';
 
   const [countries, setCountrie] = useState();
+  const [search, setSearch] = useState('All');
 
   const { data, setData } = useContext(MyContent);
 
@@ -26,24 +27,39 @@ export default function Nationality() {
     fetchApi(url).then((response) => setData(response));
   };
 
+  const fetchForCountry = () => {
+    const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${search}`;
+    fetchApi(url).then((response) => setData(response));
+    console.log(data);
+  };
+
+  const onChange = ({ target }) => {
+    const { value } = target;
+    setSearch(value);
+  };
+
   useEffect(() => {
+    if (search === 'All' || search === undefined) {
+      fecthAll();
+    } else {
+      fetchForCountry();
+    }
     fecthCountryName();
-    fecthAll();
-  }, []);
+  }, [search]);
 
   return (
     <div>
       <select
-        // id="dropdown-basic-button" title="Country">
         data-testid="explore-by-nationality-dropdown"
+        onChange={ onChange }
       >
+        <option data-testid="All-option">All</option>
         {
           countries !== undefined
           && countries[type]
           && countries[type]
             .map((country) => (
               <option
-                href="#/action-1"
                 key={ country.strArea }
                 data-testid={ `${country.strArea}-option` }
               >
@@ -52,9 +68,7 @@ export default function Nationality() {
             ))
         }
       </select>
-      {
-        console.log(data)
-      }
+
       <div>
         {
           data !== undefined
@@ -62,9 +76,11 @@ export default function Nationality() {
           && data[type]
             .filter((item, index) => index < doze)
             .map((meal, index) => (
-              <div
+              <button
+                type="button"
                 key={ meal.idMeal }
                 data-testid={ `${index}-recipe-card` }
+                onClick={ () => history.push(`/foods/${meal.idMeal}`) }
               >
                 <p data-testid={ `${index}-card-name` }>
                   { meal.strMeal }
@@ -75,7 +91,7 @@ export default function Nationality() {
                   src={ meal.strMealThumb }
                   width="200px"
                 />
-              </div>
+              </button>
             ))
         }
       </div>
