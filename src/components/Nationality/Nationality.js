@@ -14,6 +14,8 @@ export default function Nationality() {
 
   const { data, setData } = useContext(MyContent);
 
+  const doze = 12;
+
   const fecthCountryName = () => {
     const url = `https://www.${domainName}.com/api/json/v1/1/list.php?a=list`;
     fetchApi(url).then((response) => setCountrie(response));
@@ -58,12 +60,17 @@ export default function Nationality() {
           data !== undefined
           && data[type]
           && data[type]
-            .map((meal) => (
-              <div key={ meal.idMeal }>
-                <p>
+            .filter((item, index) => index < doze)
+            .map((meal, index) => (
+              <div
+                key={ meal.idMeal }
+                data-testid={ `${index}-recipe-card` }
+              >
+                <p data-testid={ `${index}-card-name` }>
                   { meal.strMeal }
                 </p>
                 <img
+                  data-testid={ `${index}-card-img` }
                   alt={ meal.strMeal }
                   src={ meal.strMealThumb }
                   width="200px"
