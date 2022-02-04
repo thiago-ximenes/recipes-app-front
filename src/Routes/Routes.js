@@ -10,6 +10,7 @@ import FavoriteRecipes from '../pages/FavoriteRecipes';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Recipes from '../pages/Recipes';
+import NotFound from '../components/NotFound/NotFound';
 
 function Routes() {
   return (
@@ -38,6 +39,9 @@ function Routes() {
         exact
         path="/explore/foods/nationalities"
         component={ ExploreNationalities }
+      />
+      <Route
+        component={ NotFound }
       />
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />

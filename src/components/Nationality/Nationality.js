@@ -1,14 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-// import { Dropdown, DropdownButton } from 'react-bootstrap';
 import fetchApi from '../../services/fetchApi';
 import MyContent from '../../Context/MyHeaderSearchContext/MyContent';
 
 export default function Nationality() {
   const history = useHistory();
-  const domainName = history.location.pathname.includes('foods')
-    ? 'themealdb' : 'thecocktaildb';
-  const type = domainName === 'themealdb' ? 'meals' : 'drinks';
 
   const [countries, setCountrie] = useState();
   const [search, setSearch] = useState('All');
@@ -18,19 +14,18 @@ export default function Nationality() {
   const doze = 12;
 
   const fecthCountryName = () => {
-    const url = `https://www.${domainName}.com/api/json/v1/1/list.php?a=list`;
+    const url = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
     fetchApi(url).then((response) => setCountrie(response));
   };
 
   const fecthAll = () => {
-    const url = `https://www.${domainName}.com/api/json/v1/1/search.php?s=`;
+    const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     fetchApi(url).then((response) => setData(response));
   };
 
   const fetchForCountry = () => {
     const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${search}`;
     fetchApi(url).then((response) => setData(response));
-    console.log(data);
   };
 
   const onChange = ({ target }) => {
@@ -56,8 +51,8 @@ export default function Nationality() {
         <option data-testid="All-option">All</option>
         {
           countries !== undefined
-          && countries[type]
-          && countries[type]
+          && countries.meals
+          && countries.meals
             .map((country) => (
               <option
                 key={ country.strArea }
@@ -72,8 +67,8 @@ export default function Nationality() {
       <div>
         {
           data !== undefined
-          && data[type]
-          && data[type]
+          && data.meals
+          && data.meals
             .filter((item, index) => index < doze)
             .map((meal, index) => (
               <button
