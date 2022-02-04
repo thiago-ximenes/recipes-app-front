@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
-import MyHeaderSearchProvider
-from '../../Context/MyHeaderSearchContext/MyHeaderSearchProvider';
 import HeaderSearch from './HeaderSearch';
 
 // 360 x 640
@@ -15,7 +14,6 @@ function Header() {
 
   // https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
   // Como fazer uma string com a primeira letra maiúscula
-
   const capitalize = history.location.pathname.split('/');
   const capitalizePathname = capitalize.filter((empty) => empty !== '').map((word) => {
     const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
@@ -29,11 +27,13 @@ function Header() {
     || capitalizePathname === 'Explore Foods Ingredients') {
       setIsThereButton(false);
     }
-  }, [capitalizePathname]);
+  }, []);
 
   return (
-    <MyHeaderSearchProvider>
-      <div className=" d-flex flex-row justify-content-between">
+    <Container>
+      <Row
+        className="justify-content-between"
+      >
         <button
           src={ profile }
           type="button"
@@ -63,11 +63,15 @@ function Header() {
             />
           </button>
         ) }
+      </Row>
+      <Row
+        className="justify-content-between"
+      >
         {toggleSearch && (
           <HeaderSearch />
         )}
-      </div>
-    </MyHeaderSearchProvider>
+      </Row>
+    </Container>
   );
 }
 
