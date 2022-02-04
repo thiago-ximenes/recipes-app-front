@@ -72,7 +72,7 @@ function RecipeDrinksDetails(props) {
       />
       <Ingredients ingredients={ ingredients } measures={ measures } />
       <ShareButton />
-      <FavoriteButton />
+      <FavoriteButton buttonName="drink" drinkRecipeDetail={ drinkRecipeDetail } />
       <Recomendation recomendation={ foodRecomendation } />
       <StartDrinkButton
         name="drink"

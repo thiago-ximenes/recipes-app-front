@@ -12,7 +12,7 @@ function GlobalProvider({ children }) {
   const [localStorageToken, setLocalStorageToken] = useState({
     mealsToken: '',
     cocktailsToken: '',
-    doneRecipes: [{
+    favoriteRecipes: [{
       id: '',
       type: '',
       nationality: '',
@@ -20,8 +20,6 @@ function GlobalProvider({ children }) {
       alcoholicOrNot: '',
       name: '',
       image: '',
-      doneDate: '',
-      tags: '',
     }],
   });
 
