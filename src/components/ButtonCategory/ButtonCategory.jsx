@@ -7,8 +7,10 @@ import fetchByCategory from '../../services/fetchByCategory';
 
 function ButtonCategory() {
   const history = useHistory();
-  const { domainNameUrl, categories, setCategories } = useContext(GlobalContext);
-  const { setData, setLoading } = useContext(MyContext);
+  const { domainNameUrl, categories, setCategories,
+    setCategoryToggle } = useContext(GlobalContext);
+  const { setCategoriesData, categoriesData,
+    setLoading } = useContext(MyContext);
   const [categoryType, setCategoryType] = useState('meals');
 
   useEffect(() => {
@@ -29,7 +31,14 @@ function ButtonCategory() {
     setLoading(true);
     fetchByCategory(category, categoryType)
       .then((categoryData) => {
-        setData(categoryData);
+        // https://www.tutorialspoint.com/how-to-compare-two-objects-in-javascript
+        if (JSON.stringify(categoryData) === JSON.stringify(categoriesData)) {
+          setCategoryToggle(false);
+          setCategoriesData([]);
+        } else {
+          setCategoryToggle(true);
+          setCategoriesData(categoryData);
+        }
       });
     setLoading(false);
   }

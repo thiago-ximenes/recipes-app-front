@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import GlobalContext from './GlobalContext';
 
 function GlobalProvider({ children }) {
@@ -20,6 +20,8 @@ function GlobalProvider({ children }) {
 
   const [categories, setCategories] = useState('');
 
+  const [categoryToggle, setCategoryToggle] = useState(false);
+
   const contextValues = {
     login,
     setLogin,
@@ -31,6 +33,8 @@ function GlobalProvider({ children }) {
     setCategoryType,
     categories,
     setCategories,
+    categoryToggle,
+    setCategoryToggle,
   };
 
   return (
