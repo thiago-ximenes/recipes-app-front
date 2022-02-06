@@ -27,20 +27,26 @@ function ButtonCategory() {
     setCategoryType(routName);
   }, [domainNameUrl]);
 
-  function setCategoryData(category) {
+  function setToggleFunctionality(category) {
+    // https://www.tutorialspoint.com/how-to-compare-two-objects-in-javascript
+    if (JSON.stringify(category) === JSON.stringify(categoriesData)) {
+      setCategoryToggle(false);
+      setCategoriesData([]);
+    } else {
+      setCategoryToggle(true);
+      setCategoriesData(category);
+    }
+  }
+
+  function fetchingWithLoading(theFetchCall, category = null) {
     setLoading(true);
-    fetchByCategory(category, categoryType)
-      .then((categoryData) => {
-        // https://www.tutorialspoint.com/how-to-compare-two-objects-in-javascript
-        if (JSON.stringify(categoryData) === JSON.stringify(categoriesData)) {
-          setCategoryToggle(false);
-          setCategoriesData([]);
-        } else {
-          setCategoryToggle(true);
-          setCategoriesData(categoryData);
-        }
-      });
+    theFetchCall(categoryType, category)
+      .then((categoryData) => setToggleFunctionality(categoryData));
     setLoading(false);
+  }
+
+  function setCategoryData(category) {
+    fetchingWithLoading(fetchByCategory, category);
   }
 
   const FOUR = 4;
@@ -60,8 +66,23 @@ function ButtonCategory() {
       }
       return null;
     });
+    result.push(
+      <Button
+        key={ 5 }
+        variant="secondary"
+        data-testid="All-category-filter"
+        onClick={ () => {
+          setCategoryToggle(false);
+          setCategoriesData([]);
+        } }
+      >
+        All
+      </Button>,
+    );
     return result;
   }
+
+  console.log(categoriesData);
 
   return (
     <div>

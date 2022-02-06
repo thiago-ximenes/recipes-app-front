@@ -1,4 +1,4 @@
-async function fetchByCategory(category, type) {
+async function fetchByCategory(type, category) {
   const domain = type === 'meals' ? 'themealdb' : 'thecocktaildb';
   const url = `https://www.${domain}.com/api/json/v1/1/filter.php?c=${category}`;
   try {
