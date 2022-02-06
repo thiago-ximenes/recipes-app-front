@@ -8,6 +8,7 @@ function MyHeaderSearchProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [domainName, setDomainName] = useState('');
   const [data, setData] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([]);
 
   return (
     <MyContext.Provider
@@ -22,6 +23,8 @@ function MyHeaderSearchProvider({ children }) {
         setLoading,
         data,
         setData,
+        categoriesData,
+        setCategoriesData,
       } }
     >
       { children }

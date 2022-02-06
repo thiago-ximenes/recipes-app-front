@@ -10,31 +10,54 @@ import MyContext from '../Context/MyHeaderSearchContext/MyContent';
 function Recipes() {
   const history = useHistory();
 
-  const { loading, data, setData, setLoading } = useContext(MyContext);
-
-  const { domainNameUrl } = useContext(GlobalContext);
+  const { loading, data, categoriesData, setData, setLoading } = useContext(MyContext);
+  const { domainNameUrl, categoryToggle } = useContext(GlobalContext);
 
   const [recipeType, setRecipeType] = useState('meals');
+  const [recipeData, setRecipeData] = useState([]);
+
+  function getDomainName() {
+    const domainName = history.location.pathname.split('/')[1];
+    const routName = {
+      drinks: 'drinks',
+      foods: 'meals',
+    };
+    setRecipeType(routName[domainName]);
+  }
 
   useEffect(() => {
-    const domainName = history.location.pathname.split('/')[1];
-    const routName = domainName === 'foods' ? 'meals' : 'drinks';
-    setRecipeType(routName);
+    getDomainName();
   }, []);
+
+  useEffect(() => {
+    if (categoryToggle) setRecipeData(categoriesData);
+    else setRecipeData(data);
+  }, [categoriesData]);
+
+  useEffect(() => {
+    if (!categoryToggle) setRecipeData(data);
+    else setRecipeData(categoriesData);
+  }, [data]);
 
   useEffect(() => {
     let domainName = history.location.pathname.split('/')[1];
     domainName = domainNameUrl === domainName ? domainNameUrl : domainName;
-    const domainUrl = domainName === 'foods' ? 'themealdb' : 'thecocktaildb';
+    const domainUrl = {
+      foods: 'themealdb',
+      drinks: 'thecocktaildb',
+    };
 
-    const url = `https://www.${domainUrl}.com/api/json/v1/1/search.php?s=`;
+    const url = `https://www.${domainUrl[domainName]}.com/api/json/v1/1/search.php?s=`;
     setLoading(true);
     fetch(url)
       .then((response) => response.json())
       .then((result) => setData(result));
 
-    const routName = domainName === 'foods' ? 'meals' : 'drinks';
-    setRecipeType(routName);
+    const routName = {
+      drinks: 'drinks',
+      foods: 'meals',
+    };
+    setRecipeType(routName[domainName]);
     setLoading(false);
   }, [domainNameUrl]);
 
@@ -49,7 +72,7 @@ function Recipes() {
   }
 
   function renderData() {
-    const result = data[recipeType].map((recipe, index) => {
+    const result = recipeData[recipeType].map((recipe, index) => {
       if (index <= ELEVEN) {
         return (
           <Row
@@ -84,7 +107,8 @@ function Recipes() {
       <div>
         <Header />
         <ButtonCategory />
-        { data && data[recipeType] && data[recipeType].length && renderData()}
+        { recipeData && recipeData[recipeType]
+        && recipeData[recipeType].length && renderData() }
         <MenuInferior />
       </div>
     ) : (
