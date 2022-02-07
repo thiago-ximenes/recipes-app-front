@@ -70,7 +70,7 @@ function RecipeDrinksDetails(props) {
       <Ingredients ingredients={ ingredients } measures={ measures } />
       <ShareButton />
       <FavoriteButton buttonName="drink" drinkRecipeDetail={ drinkRecipeDetail } />
-      <Recommendation recommendations={ foodRecommendation } />
+      <Recommendation recommendations={ foodRecommendation } type="meals" />
       <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }

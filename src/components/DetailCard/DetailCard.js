@@ -1,11 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 function DetailCard(props) {
   const { src, title, category, alt, instructions, tagName } = props;
   return (
     <div>
       <img
+        style={ { width: '18%' } }
         data-testid="recipe-photo"
         src={ src }
         alt={ alt }

@@ -75,7 +75,7 @@ function RecipeFoodDetails(props) {
       />
       <ShareButton />
       <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } />
-      <Recommendation recommendations={ drinkRecommendation } />
+      <Recommendation recommendations={ drinkRecommendation } type="drinks" />
       <StartFoodButton
         name="food"
         id={ foodRecipeDetail.idMeal }
