@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import GlobalContext from '../../Context/GlobalContext';
 import Drinkicon from '../../images/drinkIcon.svg';
 import ExploreIncon from '../../images/exploreIcon.svg';
 import FoodIcon from '../../images/mealIcon.svg';
 
 export default function MenuInferior() {
   const history = useHistory();
+
+  const { setDomainName } = useContext(GlobalContext);
 
   return (
     <footer
@@ -16,7 +19,10 @@ export default function MenuInferior() {
         data-testid="food-bottom-btn"
         type="button"
         src={ FoodIcon }
-        onClick={ () => history.push('/foods') }
+        onClick={ () => {
+          setDomainName('foods');
+          history.push('/foods');
+        } }
       >
         <img src={ FoodIcon } alt="ilustração com taça" />
       </button>
@@ -24,7 +30,10 @@ export default function MenuInferior() {
         data-testid="drinks-bottom-btn"
         type="button"
         src={ Drinkicon }
-        onClick={ () => history.push('/drinks') }
+        onClick={ () => {
+          history.push('/drinks');
+          setDomainName('drinks');
+        } }
       >
         <img src={ Drinkicon } alt="ilustração com taça" />
       </button>
