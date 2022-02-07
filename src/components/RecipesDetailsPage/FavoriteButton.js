@@ -7,9 +7,8 @@ import blackHeart from '../../images/blackHeartIcon.svg';
 function FavoriteButton(props) {
   const { setLocalStorageToken } = useContext(GlobalContext);
   const { foodRecipeDetail, drinkRecipeDetail, buttonName } = props;
-  // console.log(foodRecipeDetail); // ok, ta pegando
-  const favoriteInLocalStorage = localStorage.getItem('favoriteRecipes');
-  console.log(favoriteInLocalStorage);
+  // const favoriteInLocalStorage = localStorage.getItem('favoriteRecipes');
+  // console.log(favoriteInLocalStorage);
 
   // checa se há algo no LS
   const isFavorite = () => {
@@ -61,7 +60,6 @@ function FavoriteButton(props) {
     if (buttonName === 'drink') {
       addDrinkToFavorite();
     }
-    console.log(buttonName); // ok, funcionando
   };
 
   return (

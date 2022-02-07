@@ -4,7 +4,7 @@ import DetailCard from '../components/DetailCard/DetailCard';
 import { getDrinksDetails } from '../Services/index';
 import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
-import Recomendation from '../components/RecipesDetailsPage/Recomendation';
+import Recommendation from '../components/RecipesDetailsPage/Recommendation';
 import ShareButton from '../components/RecipesDetailsPage/ShareButton';
 import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
 
@@ -13,17 +13,15 @@ function RecipeDrinksDetails(props) {
   const { match: { params: { id } } } = props;
   // state padrão da recipe a ser detalhada
   const [drinkRecipeDetail, setDrinkRecipeDetail] = useState({});
-  const [foodRecomendation, setFoodRecomendation] = useState({});
+  const [foodRecommendation, setFoodRecommendation] = useState({});
 
   useEffect(() => {
     getDrinksDetails(id)
       .then((response) => setDrinkRecipeDetail(response.drinks[0]));
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-      .then((response) => setFoodRecomendation(response));
-    console.log(foodRecomendation);
+      .then((response) => response.json())
+      .then((response) => setFoodRecommendation(response));
   }, []);
-
-  console.log(drinkRecipeDetail);
 
   const [ingredients, setIngredients] = useState([]);
 
@@ -38,7 +36,6 @@ function RecipeDrinksDetails(props) {
         ingredientsUsed.push(ingredientsUsedList);
       }
     }
-    // console.log(ingredientsUsed); // pega os ingredients --> ok
     setIngredients(ingredientsUsed);
   };
 
@@ -73,7 +70,7 @@ function RecipeDrinksDetails(props) {
       <Ingredients ingredients={ ingredients } measures={ measures } />
       <ShareButton />
       <FavoriteButton buttonName="drink" drinkRecipeDetail={ drinkRecipeDetail } />
-      <Recomendation recomendation={ foodRecomendation } />
+      <Recommendation recommendations={ foodRecommendation } />
       <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }

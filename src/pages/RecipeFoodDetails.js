@@ -5,7 +5,7 @@ import { getFoodDetails } from '../Services/index';
 import StartFoodButton from '../components/StartRecipeButtons/StartFoodButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import VideoFood from '../components/RecipesDetailsPage/VideoFood';
-import Recomendation from '../components/RecipesDetailsPage/Recomendation';
+import Recommendation from '../components/RecipesDetailsPage/Recommendation';
 import ShareButton from '../components/RecipesDetailsPage/ShareButton';
 import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
 
@@ -14,18 +14,15 @@ function RecipeFoodDetails(props) {
   const { match: { params: { id } } } = props;
   // state padrão da recipe a ser detalhada
   const [foodRecipeDetail, setFoodRecipeDetail] = useState({});
-  const [drinkRecomendation, setDrinkRecomendation] = useState({});
+  const [drinkRecommendation, setDrinkRecommendation] = useState({});
 
   useEffect(() => {
     getFoodDetails(id)
       .then((response) => setFoodRecipeDetail(response.meals[0]));
-    // console.log(foodRecipeDetail);
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-      .then((response) => setDrinkRecomendation(response));
-    console.log(drinkRecomendation);
+      .then((response) => response.json())
+      .then((response) => setDrinkRecommendation(response));
   }, []);
-
-  console.log(foodRecipeDetail);
 
   const [ingredients, setIngredients] = useState([]);
 
@@ -40,7 +37,6 @@ function RecipeFoodDetails(props) {
         ingredientsUsed.push(ingredientsUsedList);
       }
     }
-    // console.log(ingredientsUsed); // pega os ingredients --> ok
     setIngredients(ingredientsUsed);
   };
 
@@ -79,7 +75,7 @@ function RecipeFoodDetails(props) {
       />
       <ShareButton />
       <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } />
-      <Recomendation recomendation={ drinkRecomendation } />
+      <Recommendation recommendations={ drinkRecommendation } />
       <StartFoodButton
         name="food"
         id={ foodRecipeDetail.idMeal }
