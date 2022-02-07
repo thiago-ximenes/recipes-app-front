@@ -4,6 +4,7 @@ import Header from '../components/Header/Header';
 import ProfileButtons from '../components/ProfileButtons/ProfileButtons';
 
 export default function Profile() {
+  const email = localStorage.getItem('user');
   return (
     <div>
       <Header />
