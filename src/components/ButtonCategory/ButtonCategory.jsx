@@ -82,7 +82,7 @@ function ButtonCategory() {
     return result;
   }
 
-  console.log(categoriesData);
+  // console.log(categoriesData);
 
   return (
     <div>
