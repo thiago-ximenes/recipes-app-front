@@ -22,10 +22,10 @@ function RecipeFoodDetails(props) {
     // console.log(foodRecipeDetail);
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => setDrinkRecomendation(response));
-    console.log(drinkRecomendation);
+    // console.log(drinkRecomendation);
   }, []);
 
-  console.log(foodRecipeDetail);
+  // console.log(foodRecipeDetail);
 
   const [ingredients, setIngredients] = useState([]);
 
@@ -78,7 +78,7 @@ function RecipeFoodDetails(props) {
         videoFoods={ foodRecipeDetail.strYoutube }
       />
       <ShareButton />
-      <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } />
+      <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } id={ id } />
       <Recomendation recomendation={ drinkRecomendation } />
       <StartFoodButton
         name="food"
