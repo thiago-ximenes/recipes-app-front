@@ -5,7 +5,7 @@ import Explore from '../pages/Explore';
 import ExploreDrinks from '../pages/ExploreDrinks';
 import ExploreIngredients from '../pages/ExploreIngredients';
 import ExploreFoods from '../pages/ExploreFoods';
-import ExploreFoodsNationalities from '../pages/ExploreFoodsNationalities';
+import ExploreNationalities from '../pages/ExploreNationalities';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import RecipeFoodDetails from '../pages/RecipeFoodDetails';
 import RecipeDrinksDetails from '../pages/RecipeDrinksDetails';
@@ -14,6 +14,7 @@ import DrinksInProgress from '../pages/DrinksInProgress';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Recipes from '../pages/Recipes';
+import NotFound from '../components/NotFound/NotFound';
 
 function Routes() {
   return (
@@ -41,11 +42,16 @@ function Routes() {
       <Route
         exact
         path="/explore/foods/nationalities"
-        component={ ExploreFoodsNationalities }
+        component={ ExploreNationalities }
       />
+
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+
+      <Route
+        component={ NotFound }
+      />
     </Switch>
   );
 }
