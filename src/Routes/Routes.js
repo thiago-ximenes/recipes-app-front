@@ -1,20 +1,19 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Explore from '../pages/Explore';
-import Login from '../pages/Login';
-import Recipes from '../pages/Recipes';
-import ExploreFoods from '../pages/ExploreFoods';
-import ExploreDrinks from '../pages/ExploreDrinks';
-import ExploreFoodIngredients from '../pages/ExploreFoodIngredients';
-import ExploreDrinksIngredients from '../pages/ExploreDrinksIngredients';
-import ExploreFoodsNationalities from '../pages/ExploreFoodsNationalities';
 import DoneRecipes from '../pages/DoneRecipes';
-import Profile from '../pages/Profile';
+import Explore from '../pages/Explore';
+import ExploreDrinks from '../pages/ExploreDrinks';
+import ExploreIngredients from '../pages/ExploreIngredients';
+import ExploreFoods from '../pages/ExploreFoods';
+import ExploreFoodsNationalities from '../pages/ExploreFoodsNationalities';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import RecipeFoodDetails from '../pages/RecipeFoodDetails';
 import RecipeDrinksDetails from '../pages/RecipeDrinksDetails';
 import FoodsInProgress from '../pages/FoodsInProgess';
 import DrinksInProgress from '../pages/DrinksInProgress';
+import Login from '../pages/Login';
+import Profile from '../pages/Profile';
+import Recipes from '../pages/Recipes';
 
 function Routes() {
   return (
@@ -32,12 +31,12 @@ function Routes() {
       <Route
         exact
         path="/explore/foods/ingredients"
-        component={ ExploreFoodIngredients }
+        component={ ExploreIngredients }
       />
       <Route
         exact
         path="/explore/drinks/ingredients"
-        component={ ExploreDrinksIngredients }
+        component={ ExploreIngredients }
       />
       <Route
         exact
