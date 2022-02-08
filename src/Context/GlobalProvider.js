@@ -9,19 +9,7 @@ function GlobalProvider({ children }) {
     isDisabled: true,
   });
 
-  const [localStorageToken, setLocalStorageToken] = useState({
-    mealsToken: '',
-    cocktailsToken: '',
-    favoriteRecipes: [{
-      id: '',
-      type: '',
-      nationality: '',
-      category: '',
-      alcoholicOrNot: '',
-      name: '',
-      image: '',
-    }],
-  });
+  const [localStorageToken, setLocalStorageToken] = useState([]);
 
   const [domainNameUrl, setDomainName] = useState('');
 

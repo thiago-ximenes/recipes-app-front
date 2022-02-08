@@ -21,6 +21,7 @@ function RecipeDrinksDetails(props) {
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
       .then((response) => setFoodRecommendation(response));
+    // console.log(foodRecomendation);
   }, []);
 
   const [ingredients, setIngredients] = useState([]);
@@ -69,8 +70,12 @@ function RecipeDrinksDetails(props) {
       />
       <Ingredients ingredients={ ingredients } measures={ measures } />
       <ShareButton />
-      <FavoriteButton buttonName="drink" drinkRecipeDetail={ drinkRecipeDetail } />
-      <Recommendation recommendations={ foodRecommendation } type="meals" />
+      <FavoriteButton
+        buttonName="drink"
+        drinkRecipeDetail={ drinkRecipeDetail }
+        id={ id }
+      />
+      <Recomendation recomendation={ foodRecomendation } />
       <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }

@@ -24,6 +24,8 @@ function RecipeFoodDetails(props) {
       .then((response) => setDrinkRecommendation(response));
   }, []);
 
+  // console.log(foodRecipeDetail);
+
   const [ingredients, setIngredients] = useState([]);
 
   const listIngredients = () => {
@@ -74,8 +76,8 @@ function RecipeFoodDetails(props) {
         videoFoods={ foodRecipeDetail.strYoutube }
       />
       <ShareButton />
-      <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } />
-      <Recommendation recommendations={ drinkRecommendation } type="drinks" />
+      <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } id={ id } />
+      <Recomendation recomendation={ drinkRecomendation } />
       <StartFoodButton
         name="food"
         id={ foodRecipeDetail.idMeal }
