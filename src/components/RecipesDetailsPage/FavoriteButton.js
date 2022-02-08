@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import localStorageHook from '../../hooks/localStorageHook';
-import whiteHeart from '../../images/whiteHeartIcon.svg';
 import blackHeart from '../../images/blackHeartIcon.svg';
+import whiteHeart from '../../images/whiteHeartIcon.svg';
 
 function FavoriteButton(props) {
   const { foodRecipeDetail, drinkRecipeDetail, buttonName, id } = props;
