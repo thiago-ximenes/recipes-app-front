@@ -61,7 +61,7 @@ function FavoriteButton(props) {
   const removeFavorite = () => {
     if (isFavorite()) {
       const removedRecipe = recipesStored.filter((recipe) => recipe.id !== id);
-      return setFavorite(removedRecipe); // o problema estava em usar 'favoriteRecipe' pq quebrava a primeira verificação -- ok
+      return setFavorite(removedRecipe);
     }
     return addToFavorite();
   };
