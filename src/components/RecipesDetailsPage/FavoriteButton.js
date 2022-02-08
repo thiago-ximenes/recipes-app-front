@@ -1,29 +1,28 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import GlobalContext from '../../Context/GlobalContext';
+import localStorageHook from '../../hooks/localStorageHook';
 import whiteHeart from '../../images/whiteHeartIcon.svg';
 import blackHeart from '../../images/blackHeartIcon.svg';
 
 function FavoriteButton(props) {
-  const { setLocalStorageToken } = useContext(GlobalContext);
-  const { foodRecipeDetail, drinkRecipeDetail, buttonName } = props;
-  // console.log(foodRecipeDetail); // ok, ta pegando
-  const favoriteInLocalStorage = localStorage.getItem('favoriteRecipes');
-  console.log(favoriteInLocalStorage);
+  const { foodRecipeDetail, drinkRecipeDetail, buttonName, id } = props;
 
-  // checa se há algo no LS
+  const recipesStored = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  // console.log(recipesStored);
+  // console.log(typeof recipesStored);
+  const [favorite, setFavorite] = localStorageHook('favoriteRecipes', []);
+
   const isFavorite = () => {
-    const favoriteRecipe = localStorage.getItem('favoriteRecipes');
-    if (favoriteRecipe) return true;
+    if (recipesStored) {
+      return recipesStored.some((recipe) => recipe.id === id);
+    }
     return false;
   };
 
-  // estava havendo problema no teste entao optou-se em dividir
-  // faltam [] nos favoritos, dava para ter deixado tudo junto afinal!!
   const addFoodToFavorite = () => {
     const { idMeal, strArea, strCategory,
       strMeal, strMealThumb } = foodRecipeDetail;
-    const newFavoriteFood = [{
+    const newFavorite = {
       id: idMeal,
       type: 'food',
       nationality: strArea,
@@ -31,50 +30,53 @@ function FavoriteButton(props) {
       alcoholicOrNot: '',
       name: strMeal,
       image: strMealThumb,
-    }];
-    const favoriteFood = localStorage
-      .setItem('favoriteRecipes', [JSON.stringify(newFavoriteFood)]);
-    setLocalStorageToken(favoriteFood);
+    };
+    return newFavorite;
   };
 
   const addDrinkToFavorite = () => {
     const { strDrink, strDrinkThumb,
-      strDrinkCategory, strAlcoholic, idDrink } = drinkRecipeDetail;
-    const newFavoriteDrink = [{
+      strCategory, strAlcoholic, idDrink } = drinkRecipeDetail;
+    console.log(strAlcoholic);
+    const newFavorite = {
       id: idDrink,
       type: 'drink',
       nationality: '',
-      category: strDrinkCategory,
+      category: strCategory,
       alcoholicOrNot: strAlcoholic,
       name: strDrink,
       image: strDrinkThumb,
-    }];
-    const favoriteDrink = localStorage
-      .setItem('favoriteRecipes', [JSON.stringify(newFavoriteDrink)]);
-    setLocalStorageToken(favoriteDrink);
+    };
+    return newFavorite;
   };
 
   const addToFavorite = () => {
     if (buttonName === 'food') {
-      addFoodToFavorite();
+      setFavorite([...favorite, addFoodToFavorite()]);
+    } else {
+      setFavorite([...favorite, addDrinkToFavorite()]);
     }
-    if (buttonName === 'drink') {
-      addDrinkToFavorite();
+  };
+
+  const removeFavorite = () => {
+    if (isFavorite()) {
+      const removedRecipe = recipesStored.filter((recipe) => recipe.id !== id);
+      return setFavorite(removedRecipe);
     }
-    console.log(buttonName); // ok, funcionando
+    return addToFavorite();
   };
 
   return (
     <div>
       <button
-        data-testid="favorite-btn"
         type="button"
         buttonName={ buttonName }
-        onClick={ () => addToFavorite() }
+        onClick={ () => removeFavorite() }
       >
         <img
+          data-testid="favorite-btn"
           src={ isFavorite() ? blackHeart : whiteHeart }
-          alt="button"
+          alt="favorite-btn"
         />
         Favorite
       </button>
@@ -86,6 +88,7 @@ FavoriteButton.propTypes = {
   buttonName: PropTypes.string.isRequired,
   foodRecipeDetail: PropTypes.objectOf(PropTypes.string).isRequired,
   drinkRecipeDetail: PropTypes.objectOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default FavoriteButton;
