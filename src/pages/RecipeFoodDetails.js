@@ -24,8 +24,6 @@ function RecipeFoodDetails(props) {
       .then((response) => setDrinkRecommendation(response));
   }, []);
 
-  // console.log(foodRecipeDetail);
-
   const [ingredients, setIngredients] = useState([]);
 
   const listIngredients = () => {
