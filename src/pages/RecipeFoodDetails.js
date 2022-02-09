@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import DetailCard from '../components/DetailCard/DetailCard';
+import { getFoodDetails } from '../Services';
+import StartFoodButton from '../components/StartRecipeButtons/StartFoodButton';
 import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import Recommendation from '../components/RecipesDetailsPage/Recommendation';
 import ShareButton from '../components/RecipesDetailsPage/ShareButton';
 import VideoFood from '../components/RecipesDetailsPage/VideoFood';
-import StartFoodButton from '../components/StartRecipeButtons/StartFoodButton';
-import { getFoodDetails } from '../Services/index';
 
 function RecipeFoodDetails(props) {
   // useParams do router
@@ -73,7 +73,7 @@ function RecipeFoodDetails(props) {
       <VideoFood
         videoFoods={ foodRecipeDetail.strYoutube }
       />
-      <ShareButton />
+      <ShareButton link={ `foods/${id}` } />
       <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } id={ id } />
       <Recommendation
         recommendations={ drinkRecommendation }

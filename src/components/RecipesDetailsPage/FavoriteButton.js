@@ -78,7 +78,6 @@ function FavoriteButton(props) {
           src={ isFavorite() ? blackHeart : whiteHeart }
           alt="favorite-btn"
         />
-        Favorite
       </button>
     </div>
   );
