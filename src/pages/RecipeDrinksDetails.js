@@ -81,6 +81,7 @@ function RecipeDrinksDetails(props) {
       <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }
+        ingredients={ ingredients }
       />
     </div>
   );

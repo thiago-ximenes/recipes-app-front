@@ -82,6 +82,7 @@ function RecipeFoodDetails(props) {
       <StartFoodButton
         name="food"
         id={ foodRecipeDetail.idMeal }
+        ingredients={ ingredients }
       />
     </div>
   );
