@@ -9,20 +9,6 @@ function DoneRecipesMain() {
     if (localStorage.getItem('doneRecipes') !== null) {
       setDoneRecipes(JSON.parse(localStorage.getItem('doneRecipes')));
     }
-    setDoneRecipes([{
-      id: '52771',
-      type: 'food',
-      nationality: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '23/06/2020',
-      tags: [
-        'Pasta',
-        'Curry',
-      ],
-    }]);
   }, []);
 
   console.log(doneRecipes);
