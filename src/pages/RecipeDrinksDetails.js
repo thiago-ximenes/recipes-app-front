@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DetailCard from '../components/DetailCard/DetailCard';
-import { getDrinksDetails } from '../Services';
+import { getDrinksDetails } from '../services/index';
 import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import Recommendation from '../components/RecipesDetailsPage/Recommendation';

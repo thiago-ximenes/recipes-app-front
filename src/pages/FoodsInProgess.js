@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CardInProgress from '../components/Progress/CardInProgress';
-import { getFoodDetails } from '../Services';
+import { getFoodDetails } from '../services/index';
 import IngredientsInProgress from '../components/Progress/IngredientsInProgress';
 import ButtonFinish from '../components/Progress/ButtonFinish';
 import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
