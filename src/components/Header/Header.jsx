@@ -7,7 +7,7 @@ import search from '../../images/searchIcon.svg';
 import HeaderSearch from './HeaderSearch';
 
 // 360 x 640
-function Header() {
+function Header({ title = null }) {
   const [toggleSearch, setToggleSearch] = useState(false);
   const history = useHistory();
   const [isThereButton, setIsThereButton] = useState(true);
@@ -24,10 +24,17 @@ function Header() {
     if (capitalizePathname === 'Explore'
     || capitalizePathname === 'Explore Foods'
     || capitalizePathname === 'Explore Drinks'
-    || capitalizePathname === 'Explore Foods Ingredients') {
+    || capitalizePathname === 'Explore Foods Ingredients'
+    || capitalizePathname === 'Explore Drinks Ingredients'
+    || capitalizePathname === 'Profile'
+    || title === 'Favorite Recipes'
+    || title === 'Done Recipes'
+    ) {
       setIsThereButton(false);
     }
   }, []);
+
+  console.log(capitalizePathname);
 
   return (
     <Container>
@@ -48,7 +55,7 @@ function Header() {
         <h1
           data-testid="page-title"
         >
-          { capitalizePathname }
+          { title !== null ? title : capitalizePathname }
         </h1>
         { isThereButton && (
           <button
@@ -79,6 +86,7 @@ Header.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Header;
