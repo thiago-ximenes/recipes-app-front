@@ -53,13 +53,20 @@ function DoneRecipesMain() {
             >
               { recipe.name }
             </Card.Title>
-            { recipe.type === 'food' && (
+            { recipe.type === 'food' ? (
               <Card.Text
                 data-testid={ `${index}-horizontal-top-text` }
               >
                 { `${recipe.nationality} - ${recipe.category}`}
               </Card.Text>
-            )}
+            )
+              : (
+                <Card.Text
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  {recipe.alcoholicOrNot}
+                </Card.Text>
+              )}
             <span
               data-testid={ `${index}-horizontal-done-date` }
             >
