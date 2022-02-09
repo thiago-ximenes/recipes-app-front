@@ -46,17 +46,24 @@ function DoneRecipesMain() {
             <Card.Text
               data-testid={ `${index}-horizontal-name` }
             >
-              { recipe.category }
+              { recipe.name }
             </Card.Text>
             <Card.Title
               data-testid={ `${index}-horizontal-top-text` }
             >
               { recipe.name }
             </Card.Title>
+            { recipe.type === 'food' && (
+              <Card.Text
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                { `${recipe.nationality} - ${recipe.category}`}
+              </Card.Text>
+            )}
             <span
               data-testid={ `${index}-horizontal-done-date` }
             >
-              {recipe.date}
+              {recipe.doneDate}
             </span>
             <ShareButton
               testId={ `${index}-horizontal-share-btn` }

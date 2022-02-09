@@ -26,10 +26,11 @@ function ShareButton({ testId, hrefLink = null }) {
         data-testid={ testId }
         type="button"
         onClick={ () => copyLink() }
+        src={ imagem }
       >
         <img
-          src={ imagem }
           alt="button"
+          src={ imagem }
         />
         Share
         {clipBoard}
