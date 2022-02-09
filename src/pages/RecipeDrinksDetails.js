@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DetailCard from '../components/DetailCard/DetailCard';
-import { getDrinksDetails } from '../Services/index';
+import { getDrinksDetails } from '../services/index';
 import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import Recomendation from '../components/RecipesDetailsPage/Recomendation';
@@ -71,7 +71,7 @@ function RecipeDrinksDetails(props) {
         instructions={ drinkRecipeDetail.strInstructions }
       />
       <Ingredients ingredients={ ingredients } measures={ measures } />
-      <ShareButton />
+      <ShareButton link={ `drinks/${id}` } />
       <FavoriteButton
         buttonName="drink"
         drinkRecipeDetail={ drinkRecipeDetail }

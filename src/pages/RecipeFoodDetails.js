@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DetailCard from '../components/DetailCard/DetailCard';
-import { getFoodDetails } from '../Services/index';
+import { getFoodDetails } from '../services/index';
 import StartFoodButton from '../components/StartRecipeButtons/StartFoodButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import VideoFood from '../components/RecipesDetailsPage/VideoFood';
@@ -77,7 +77,7 @@ function RecipeFoodDetails(props) {
       <VideoFood
         videoFoods={ foodRecipeDetail.strYoutube }
       />
-      <ShareButton />
+      <ShareButton link={ `foods/${id}` } />
       <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } id={ id } />
       <Recomendation recomendation={ drinkRecomendation } />
       <StartFoodButton

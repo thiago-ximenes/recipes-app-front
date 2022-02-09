@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Alert } from 'react-bootstrap';
 import imagem from '../../images/shareIcon.svg';
 
-function ShareButton() {
+function ShareButton({ link }) {
   // referência do uso do clipboard com hooks
   // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
-  const [clipBoard, setClipBoard] = useState('');
-  const copiedLink = window.location.href;
-  // console.log(copiedLink);
+  const message = 'Link copied!';
+  const [clipBoard, setClipBoard] = useState(false);
 
-  const copyLink = () => {
-    navigator.clipboard.writeText(copiedLink);
-    setClipBoard('Link copied!');
+  const copyLink = (path) => {
+    const { origin } = window.location;
+
+    navigator.clipboard.writeText(`${origin}/${path}`);
+    setClipBoard(true);
   };
 
   return (
@@ -18,17 +21,22 @@ function ShareButton() {
       <button
         data-testid="share-btn"
         type="button"
-        onClick={ () => copyLink() }
+        onClick={ () => copyLink(link) }
       >
         <img
           src={ imagem }
           alt="button"
         />
-        Share
-        {clipBoard}
       </button>
+      {
+        clipBoard && <Alert variant="dark">{message}</Alert>
+      }
     </div>
   );
 }
+
+ShareButton.propTypes = {
+  link: PropTypes.string.isRequired,
+};
 
 export default ShareButton;
