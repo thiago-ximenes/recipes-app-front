@@ -68,7 +68,9 @@ function RecipeDrinksDetails(props) {
         instructions={ drinkRecipeDetail.strInstructions }
       />
       <Ingredients ingredients={ ingredients } measures={ measures } />
-      <ShareButton />
+      <ShareButton
+        testId="share-button"
+      />
       <FavoriteButton
         buttonName="drink"
         drinkRecipeDetail={ drinkRecipeDetail }
