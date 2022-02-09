@@ -24,7 +24,8 @@ function HeaderSearch() {
     console.log('chamou no HeaderSearch', data);
   });
 
-  function fetchRecipe() {
+  function fetchRecipe(e) {
+    e.preventDefault();
     const firstLetter = 'First Letter';
     const routeName = domainName === 'foods' ? 'themealdb' : 'thecocktaildb';
     if (searchHeaderRadioValue === firstLetter && searchHeaderInputValue.length > 1) {
@@ -93,7 +94,7 @@ function HeaderSearch() {
       />
       <Button
         data-testid="exec-search-btn"
-        onClick={ () => fetchRecipe() }
+        onClick={ (e) => fetchRecipe(e) }
       >
         Search
       </Button>

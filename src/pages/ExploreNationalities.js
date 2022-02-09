@@ -6,7 +6,7 @@ import Nationality from '../components/Nationality/Nationality';
 function ExploreNationalities() {
   return (
     <div>
-      <Header />
+      <Header title="Explore Nationalities" />
       <Nationality />
       <MenuInferior />
     </div>
