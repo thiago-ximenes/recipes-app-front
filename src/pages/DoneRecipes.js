@@ -6,7 +6,7 @@ import MenuInferior from '../components/MenuInferior/MenuInferior';
 function DoneRecipes() {
   return (
     <div>
-      <Header />
+      <Header title="Done Recipes" />
       <DoneRecipesMain />
       <MenuInferior />
     </div>

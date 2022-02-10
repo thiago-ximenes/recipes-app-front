@@ -6,7 +6,7 @@ import Ingredients from '../components/Ingredients/Ingredients';
 function ExploreIngredients() {
   return (
     <div>
-      <Header />
+      <Header title="Explore Ingredients" />
       <Ingredients />
       <MenuInferior />
     </div>
