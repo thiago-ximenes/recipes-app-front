@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import ShareButton from '../RecipesDetailsPage/ShareButton';
 
 function DoneRecipesMain() {
+  const history = useHistory();
+
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [filter, setFilter] = useState('all');
 
@@ -51,10 +54,12 @@ function DoneRecipesMain() {
               variant="top"
               src={ recipe.image }
               data-testid={ `${index}-horizontal-image` }
+              onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
             />
             <Card.Body>
               <Card.Text
                 data-testid={ `${index}-horizontal-name` }
+                onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
               >
                 { recipe.name }
               </Card.Text>

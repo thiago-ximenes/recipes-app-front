@@ -86,6 +86,7 @@ function MainCard() {
             <Card
               style={ { width: '18rem' } }
               onClick={ () => onClickCard(recipe) }
+              role="button"
             >
               <Card.Title
                 data-testid={ `${index.toString()}-card-name` }
