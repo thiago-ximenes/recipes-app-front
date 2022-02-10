@@ -5,6 +5,7 @@ export const getFoodDetails = (id) => {
       .then((json) => json);
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
 
