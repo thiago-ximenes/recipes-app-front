@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import DetailCard from '../components/DetailCard/DetailCard';
-import { getFoodDetails } from '../services/index';
-import StartFoodButton from '../components/StartRecipeButtons/StartFoodButton';
 import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import Recommendation from '../components/RecipesDetailsPage/Recommendation';
 import ShareButton from '../components/RecipesDetailsPage/ShareButton';
 import VideoFood from '../components/RecipesDetailsPage/VideoFood';
+import StartFoodButton from '../components/StartRecipeButtons/StartFoodButton';
+import { getFoodDetails } from '../services/index';
 
 function RecipeFoodDetails(props) {
   // useParams do router
@@ -15,8 +15,11 @@ function RecipeFoodDetails(props) {
   // state padrão da recipe a ser detalhada
   const [foodRecipeDetail, setFoodRecipeDetail] = useState({});
   const [drinkRecommendation, setDrinkRecommendation] = useState({});
+  const [disableStartButton, setDisableStartButton] = useState(false);
+  const [localStorageDone, setLocalStorageDone] = useState([]);
 
   useEffect(() => {
+    setLocalStorageDone(JSON.parse(localStorage.getItem('doneRecipes')));
     getFoodDetails(id)
       .then((response) => setFoodRecipeDetail(response.meals[0]));
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
@@ -54,9 +57,18 @@ function RecipeFoodDetails(props) {
     setMeasures(measuresUsed);
   };
 
+  function checkIfRecipeIsDone() {
+    if (foodRecipeDetail) {
+      setDisableStartButton(localStorageDone.some((
+        recipe,
+      ) => recipe.id === foodRecipeDetail.idMeal));
+    }
+  }
+
   useEffect(() => {
     listIngredients();
     ingredientMeasures();
+    checkIfRecipeIsDone();
   }, [foodRecipeDetail]);
 
   return (
@@ -79,11 +91,12 @@ function RecipeFoodDetails(props) {
         recommendations={ drinkRecommendation }
         type="drinks"
       />
-      <StartFoodButton
-        name="food"
+      { !disableStartButton
+      && <StartFoodButton
+        name="drink"
         id={ foodRecipeDetail.idMeal }
         ingredients={ ingredients }
-      />
+      />}
     </div>
   );
 }
