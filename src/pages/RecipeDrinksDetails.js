@@ -57,7 +57,7 @@ function RecipeDrinksDetails(props) {
   };
 
   function checkIfRecipeIsDone() {
-    if (drinkRecipeDetail) {
+    if (localStorageDone !== null) {
       setDisableStartButton(localStorageDone.some((
         recipe,
       ) => recipe.id === drinkRecipeDetail.idDrink));

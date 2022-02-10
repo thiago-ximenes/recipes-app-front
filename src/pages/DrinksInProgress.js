@@ -51,7 +51,10 @@ function DrinksInProgress(props) {
         title={ recipeDrinkInProgress.strDrink }
         category={ recipeDrinkInProgress.strCategory }
       />
-      <ShareButton link={ `drinks/${id}` } />
+      <ShareButton
+        link={ `drinks/${id}` }
+        testId="share-btn"
+      />
       <FavoriteButton
         buttonName="drink"
         drinkRecipeDetail={ recipeDrinkInProgress }

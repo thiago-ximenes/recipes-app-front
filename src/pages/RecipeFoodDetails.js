@@ -58,7 +58,7 @@ function RecipeFoodDetails(props) {
   };
 
   function checkIfRecipeIsDone() {
-    if (foodRecipeDetail) {
+    if (localStorageDone !== null) {
       setDisableStartButton(localStorageDone.some((
         recipe,
       ) => recipe.id === foodRecipeDetail.idMeal));

@@ -51,7 +51,10 @@ function FoodsInProgress(props) {
         title={ recipeInProgress.strMeal }
         category={ recipeInProgress.strCategory }
       />
-      <ShareButton link={ `foods/${id}` } />
+      <ShareButton
+        link={ `foods/${id}` }
+        testId="share-btn"
+      />
       <FavoriteButton buttonName="food" foodRecipeDetail={ recipeInProgress } id={ id } />
 
       {renderIngredients()}
