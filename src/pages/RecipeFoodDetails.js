@@ -73,7 +73,10 @@ function RecipeFoodDetails(props) {
       <VideoFood
         videoFoods={ foodRecipeDetail.strYoutube }
       />
-      <ShareButton link={ `foods/${id}` } />
+      <ShareButton
+        link={ `foods/${id}` }
+        testId="share-btn"
+      />
       <FavoriteButton buttonName="food" foodRecipeDetail={ foodRecipeDetail } id={ id } />
       <Recommendation
         recommendations={ drinkRecommendation }

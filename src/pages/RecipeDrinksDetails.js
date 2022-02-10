@@ -69,7 +69,7 @@ function RecipeDrinksDetails(props) {
       />
       <Ingredients ingredients={ ingredients } measures={ measures } />
       <ShareButton
-        testId="share-button"
+        testId="share-btn"
         link={ `drinks/${id}` }
       />
       <FavoriteButton
