@@ -14,8 +14,11 @@ function RecipeDrinksDetails(props) {
   // state padrão da recipe a ser detalhada
   const [drinkRecipeDetail, setDrinkRecipeDetail] = useState({});
   const [foodRecommendation, setFoodRecommendation] = useState({});
+  const [disableStartButton, setDisableStartButton] = useState(false);
+  const [localStorageDone, setLocalStorageDone] = useState([]);
 
   useEffect(() => {
+    setLocalStorageDone(JSON.parse(localStorage.getItem('doneRecipes')));
     getDrinksDetails(id)
       .then((response) => setDrinkRecipeDetail(response.drinks[0]));
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
@@ -53,10 +56,21 @@ function RecipeDrinksDetails(props) {
     setMeasures(measuresUsed);
   };
 
+  function checkIfRecipeIsDone() {
+    if (drinkRecipeDetail) {
+      setDisableStartButton(localStorageDone.some((
+        recipe,
+      ) => recipe.id === drinkRecipeDetail.idDrink));
+    }
+  }
+
   useEffect(() => {
     listIngredients();
     ingredientMeasures();
+    checkIfRecipeIsDone();
   }, [drinkRecipeDetail]);
+
+  console.log(drinkRecipeDetail);
 
   return (
     <div>
@@ -81,11 +95,12 @@ function RecipeDrinksDetails(props) {
         recommendations={ foodRecommendation }
         type="meals"
       />
-      <StartDrinkButton
+      { !disableStartButton
+      && <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }
         ingredients={ ingredients }
-      />
+      />}
     </div>
   );
 }
