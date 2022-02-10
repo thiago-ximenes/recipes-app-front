@@ -58,7 +58,7 @@ function RecipeDrinksDetails(props) {
     const localStorageDone = JSON.parse(localStorage.getItem('doneRecipes'));
     setDisableStartButton(localStorageDone.some((
       recipe,
-    ) => recipe.id === drinkRecipeDetail.id));
+    ) => recipe.id === drinkRecipeDetail.idDrink));
   }
 
   useEffect(() => {
@@ -66,6 +66,8 @@ function RecipeDrinksDetails(props) {
     ingredientMeasures();
     checkIfRecipeIsDone();
   }, [drinkRecipeDetail]);
+
+  console.log(drinkRecipeDetail);
 
   return (
     <div>
