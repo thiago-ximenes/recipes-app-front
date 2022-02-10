@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import DetailCard from '../components/DetailCard/DetailCard';
-import { getDrinksDetails } from '../services/index';
-import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
+import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import Recommendation from '../components/RecipesDetailsPage/Recommendation';
 import ShareButton from '../components/RecipesDetailsPage/ShareButton';
-import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
+import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
+import { getDrinksDetails } from '../services/index';
 
 function RecipeDrinksDetails(props) {
   // useParams do router
@@ -14,6 +14,7 @@ function RecipeDrinksDetails(props) {
   // state padrão da recipe a ser detalhada
   const [drinkRecipeDetail, setDrinkRecipeDetail] = useState({});
   const [foodRecommendation, setFoodRecommendation] = useState({});
+  const [disableStartButton, setDisableStartButton] = useState(false);
 
   useEffect(() => {
     getDrinksDetails(id)
@@ -53,9 +54,17 @@ function RecipeDrinksDetails(props) {
     setMeasures(measuresUsed);
   };
 
+  function checkIfRecipeIsDone() {
+    const localStorageDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    setDisableStartButton(localStorageDone.some((
+      recipe,
+    ) => recipe.id === drinkRecipeDetail.id));
+  }
+
   useEffect(() => {
     listIngredients();
     ingredientMeasures();
+    checkIfRecipeIsDone();
   }, [drinkRecipeDetail]);
 
   return (
@@ -78,11 +87,12 @@ function RecipeDrinksDetails(props) {
         recommendations={ foodRecommendation }
         type="meals"
       />
-      <StartDrinkButton
+      { !disableStartButton
+      && <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }
         ingredients={ ingredients }
-      />
+      />}
     </div>
   );
 }
