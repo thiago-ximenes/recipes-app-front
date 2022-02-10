@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import DetailCard from '../components/DetailCard/DetailCard';
-import { getDrinksDetails } from '../Services/index';
-import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
+import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
 import Ingredients from '../components/RecipesDetailsPage/Ingredients';
 import Recommendation from '../components/RecipesDetailsPage/Recommendation';
 import ShareButton from '../components/RecipesDetailsPage/ShareButton';
-import FavoriteButton from '../components/RecipesDetailsPage/FavoriteButton';
+import StartDrinkButton from '../components/StartRecipeButtons/StartDrinkButton';
+import { getDrinksDetails } from '../services/index';
 
 function RecipeDrinksDetails(props) {
   // useParams do router
@@ -70,6 +70,7 @@ function RecipeDrinksDetails(props) {
       <Ingredients ingredients={ ingredients } measures={ measures } />
       <ShareButton
         testId="share-button"
+        link={ `drinks/${id}` }
       />
       <FavoriteButton
         buttonName="drink"
@@ -83,6 +84,7 @@ function RecipeDrinksDetails(props) {
       <StartDrinkButton
         name="drink"
         id={ drinkRecipeDetail.idDrink }
+        ingredients={ ingredients }
       />
     </div>
   );

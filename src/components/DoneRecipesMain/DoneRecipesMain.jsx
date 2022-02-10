@@ -89,7 +89,7 @@ function DoneRecipesMain() {
               </span>
               <ShareButton
                 testId={ `${index}-horizontal-share-btn` }
-                hrefLink={ `http://localhost:3000/${recipe.type}s/${recipe.id}` }
+                link={ `${recipe.type}s/${recipe.id}` }
               />
               <span>
                 {recipe.tags.map((tag) => (
