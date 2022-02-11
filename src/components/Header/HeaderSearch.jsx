@@ -38,6 +38,7 @@ function HeaderSearch() {
     };
     // https://stackoverflow.com/questions/441018/replacing-spaces-with-underscores-in-javascript
     const url = `https://www.${routeName}.com/api/json/v1/1/${urlParams[searchHeaderRadioValue]}=${searchHeaderInputValue}`;
+    console.log('url', url);
     setLoading(true);
     fetchApi(url).then((result) => {
       setData(result);
