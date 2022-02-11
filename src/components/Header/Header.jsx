@@ -34,8 +34,6 @@ function Header({ title = null }) {
     }
   }, []);
 
-  console.log(capitalizePathname);
-
   return (
     <Container>
       <Row

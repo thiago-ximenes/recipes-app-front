@@ -14,9 +14,6 @@ function Recommendation({ recommendations, type }) {
   const FIVE = 5;
   const capitalizeType = type.charAt(0).toUpperCase() + type.slice(1, type.length - 1);
 
-  console.log(recommendations);
-  console.log(type);
-
   return (
     <Container
       fluid="sm"

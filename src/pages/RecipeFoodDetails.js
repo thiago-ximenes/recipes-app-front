@@ -21,7 +21,8 @@ function RecipeFoodDetails(props) {
   useEffect(() => {
     setLocalStorageDone(JSON.parse(localStorage.getItem('doneRecipes')));
     getFoodDetails(id)
-      .then((response) => setFoodRecipeDetail(response.meals[0]));
+      .then((response) => setFoodRecipeDetail(response.meals[0]))
+      .catch((error) => console.error(error));
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
       .then((response) => setDrinkRecommendation(response));
@@ -34,10 +35,12 @@ function RecipeFoodDetails(props) {
     const ingredientsUsed = [];
     // talvez ocorra um conflito entre esse index e o index nas props (??)
     for (let i = 1; i < totalIngredients; i += 1) {
-      const ingredientsUsedList = foodRecipeDetail[`strIngredient${i}`];
-      // nem todas as opções tem info
-      if (ingredientsUsedList !== '' && ingredientsUsedList !== null) {
-        ingredientsUsed.push(ingredientsUsedList);
+      if (foodRecipeDetail[`strIngredient${i}`]) {
+        const ingredientsUsedList = foodRecipeDetail[`strIngredient${i}`];
+        // nem todas as opções tem info
+        if (ingredientsUsedList !== '' && ingredientsUsedList !== null) {
+          ingredientsUsed.push(ingredientsUsedList);
+        }
       }
     }
     setIngredients(ingredientsUsed);
@@ -49,9 +52,11 @@ function RecipeFoodDetails(props) {
     const totalMeasures = 20;
     const measuresUsed = [];
     for (let i = 1; i < totalMeasures; i += 1) {
-      const measuresUsedList = foodRecipeDetail[`strMeasure${i}`];
-      if (measuresUsedList !== '' && measuresUsedList !== null) {
-        measuresUsed.push(measuresUsedList);
+      if (foodRecipeDetail.strMeasure1 !== '') {
+        const measuresUsedList = foodRecipeDetail[`strMeasure${i}`];
+        if (measuresUsedList !== '' && measuresUsedList !== null) {
+          measuresUsed.push(measuresUsedList);
+        }
       }
     }
     setMeasures(measuresUsed);
