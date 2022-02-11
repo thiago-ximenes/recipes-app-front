@@ -70,8 +70,6 @@ function RecipeDrinksDetails(props) {
     checkIfRecipeIsDone();
   }, [drinkRecipeDetail]);
 
-  console.log(drinkRecipeDetail);
-
   return (
     <div>
       <DetailCard
